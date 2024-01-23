@@ -1,6 +1,6 @@
 # MATH 343 / 643 Fall 2024
 
-This is the course homepage for Math 343 / 643 at Queens College, City University of New York taught by Professor Adam Kapelner. The syllabus can be read [here](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/main/syllabus/syllabus.pdf) and downloaded [here](https://raw.githubusercontent.com/kapelner/QC_MATH_343_Spring_2024/main/syllabus/syllabus.pdf).
+This is the course homepage for Math 343 / 643 at Queens College, City University of New York taught by Professor Adam Kapelner. The syllabus can be read [here](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/main/syllabus/syllabus.pdf) and downloaded [here](https://raw.githubusercontent.com/kapelner/QC_MATH_343_Spring_2024/main/syllabus/syllabus.pdf). We use [slack](https://slack.com/) for class announcements and discussions (see syllabus for link).
 
 
 ## Lectures
@@ -46,19 +46,32 @@ My lecture notes are scanned in as PDF files contributed by myself.
 * Homework 2 [(download)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/main/homeworks/hw02/hw02.pdf?raw=true) [(view)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/main/homeworks/hw02/hw02.pdf) (due 9/20)
 * Homework 1 [(download)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/main/homeworks/hw01/hw01.pdf?raw=true) [(view)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/main/homeworks/hw01/hw01.pdf) (due 9/9)-->
 
+## Labs
+
+<!--
+* [(Lab 10, *not* due)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/labs/lab10.Rmd)
+* [(Lab 9, due 5/12)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/labs/lab09.Rmd)
+* [(Lab 8, due 5/3)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/labs/lab08.Rmd)
+* [(Lab 7, due 4/24)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/labs/lab07.Rmd)
+* [(Lab 6, due 4/10)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/labs/lab06.Rmd)
+* [(Lab 5, due 4/3)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/labs/lab05.Rmd)
+* [(Midterm I Review Lab, *not* due)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/labs/midterm1review.Rmd)
+* [Lab 4, due 3/13](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/labs/lab04.Rmd)
+* [Lab 3, due 3/06](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/labs/lab03.Rmd)
+* [Lab 2, due 2/24](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/labs/lab02.Rmd) 
+* Lab 1, due 2/13 [(R language)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/labs/lab01.Rmd) -->
 
 ## Exams
 
-* Midterm I, tba
-* Midterm II, tba
+* Midterm I, Thursday, February 29 in class
+* Midterm II, Thursday, April 4 in class
 * Final, tba
 
 ## Office Hours
 
 I *want* you to come to office hours! My office hours are:
 
-Time: tba
-Location: tba 
+Time / Location: 7:45-8:30PM / KY 061
 
 ## Grades and Class Standing
 
