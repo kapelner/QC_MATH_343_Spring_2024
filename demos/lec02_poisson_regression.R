@@ -1,5 +1,9 @@
 pacman::p_load(ggplot2)
+source("lec02_visualize_function.R")
 set.seed(1)
+#https://scholar.google.com/scholar?hl=en&as_sdt=7%2C39&q=Equation+of+state+calculations+by+fast+computing+machines&btnG=
+#https://scholar.google.com/scholar?hl=en&as_sdt=7%2C39&q=Monte+Carlo+sampling+methods+using+Markov+chains+and+their+applications&btnG=
+
 n = 50
 
 #############we don't get to see the real DGP!
@@ -17,7 +21,7 @@ ggplot(data.frame(t = t_time, y = y)) +
 
 
 #chains
-num_tot_samples = 1e5
+num_tot_samples = 1e6
 theta0s = array(NA, num_tot_samples)
 theta1s = array(NA, num_tot_samples)
 
@@ -105,38 +109,13 @@ acf(theta1s,
 #let's get a closer look to make sure by zooming in on the y-axis
 
 #let's make a judgment call - maybe at 100
-
 t_thin = 100
 
 #thin the chains
 gibbs_chain = gibbs_chain[seq(1, nrow(gibbs_chain), by = t_thin), ]
-
+#how many samples left?
+nrow(gibbs_chain)
 
 #inference
-ggplot(gibbs_chain) +
-  geom_histogram(aes(x = theta_0)) +
-  geom_vline(xintercept = mean(gibbs_chain$theta_0), col = "blue") + 
-  geom_vline(xintercept = true_theta_0, col = "green") + 
-  geom_vline(xintercept = quantile(gibbs_chain$theta_0, .025), col = "red") + 
-  geom_vline(xintercept = quantile(gibbs_chain$theta_0, .975), col = "red")
-
-#mmse
-mean(gibbs_chain$theta_0)
-true_theta_0
-#CR_theta_0_95%
-c(quantile(gibbs_chain$theta_0, .025), quantile(gibbs_chain$theta_0, .975))
-
-ggplot(gibbs_chain) +
-  geom_histogram(aes(x = theta_1)) +
-  geom_vline(xintercept = mean(gibbs_chain$theta_1), col = "blue") + 
-  geom_vline(xintercept = true_theta_1, col = "green") + 
-  geom_vline(xintercept = quantile(gibbs_chain$theta_1, .025), col = "red") + 
-  geom_vline(xintercept = quantile(gibbs_chain$theta_1, .975), col = "red")
-
-#mmse
-mean(gibbs_chain$theta_1)
-true_theta_1
-#CR_theta_1_95%
-c(quantile(gibbs_chain$theta_1, .025), quantile(gibbs_chain$theta_1, .975))
-
-
+visualize_chain_and_compute_estimates_and_cr(gibbs_chain$theta_0, true_theta_0)
+visualize_chain_and_compute_estimates_and_cr(gibbs_chain$theta_1, true_theta_1)

@@ -1,4 +1,7 @@
 pacman::p_load(ggplot2)
+source("lec02_visualize_function.R")
+#https://scholar.google.com/scholar?hl=en&as_sdt=7%2C39&q=Stochastic+relaxation%2C+Gibbs+distributions%2C+and+the+Bayesian+restoration+of+images&btnG=
+
 set.seed(1)
 n = 50
 
@@ -67,30 +70,9 @@ acf(gibbs_chain$theta_2)
 
 #no thin!
 
+#how many samples left?
+nrow(gibbs_chain)
+
 #straight to inference
-ggplot(gibbs_chain) +
-  geom_histogram(aes(x = theta_1)) +
-  geom_vline(xintercept = mean(gibbs_chain$theta_1), col = "blue") + 
-  geom_vline(xintercept = true_theta_1, col = "green") + 
-  geom_vline(xintercept = quantile(gibbs_chain$theta_1, .025), col = "red") + 
-  geom_vline(xintercept = quantile(gibbs_chain$theta_1, .975), col = "red")
-
-#mmse
-mean(gibbs_chain$theta_1)
-true_theta_1
-#CR_theta_1_95%
-c(quantile(gibbs_chain$theta_1, .025), quantile(gibbs_chain$theta_1, .975))
-
-
-ggplot(gibbs_chain) +
-  geom_histogram(aes(x = theta_2)) +
-  geom_vline(xintercept = mean(gibbs_chain$theta_2), col = "blue") + 
-  geom_vline(xintercept = true_theta_2, col = "green") + 
-  geom_vline(xintercept = quantile(gibbs_chain$theta_2, .025), col = "red") + 
-  geom_vline(xintercept = quantile(gibbs_chain$theta_2, .975), col = "red")
-
-#mmse
-mean(gibbs_chain$theta_2)
-true_theta_2
-#CR_theta_1_95%
-c(quantile(gibbs_chain$theta_2, .025), quantile(gibbs_chain$theta_2, .975))
+visualize_chain_and_compute_estimates_and_cr(gibbs_chain$theta_1, true_theta_1)
+visualize_chain_and_compute_estimates_and_cr(gibbs_chain$theta_2, true_theta_2)
