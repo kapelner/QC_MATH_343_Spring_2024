@@ -57,7 +57,7 @@ stan_model_data = list(
 
 #build the stan model object and run the sampler
 stan_fit = stan(
-  seed = get_seed(),
+  seed = 1,
   file = "lec02_stan_spec_hurdle_model.stan",
   model_name = "hurdle_model",
   data = stan_model_data
