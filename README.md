@@ -1,6 +1,6 @@
 # MATH 343 / 643 Fall 2024
 
-This is the course homepage for Math 343 / 643 at Queens College, City University of New York taught by Professor Adam Kapelner. The syllabus can be read [here](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/main/syllabus/syllabus.pdf) and downloaded [here](https://raw.githubusercontent.com/kapelner/QC_MATH_343_Spring_2024/main/syllabus/syllabus.pdf). We use [slack](https://slack.com/) for class announcements and discussions (see syllabus for link).
+This is the course homepage for Math 343 / 643 at Queens College, City University of New York taught by Professor Adam Kapelner. The syllabus can be read [here](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/main/syllabus/syllabus.pdf) and downloaded [here](https://raw.githubusercontent.com/kapelner/QC_MATH_343_Spring_2024/main/syllabus/syllabus.pdf). We use [slack](https://slack.com/) for class announcements and discussions (see syllabus for link).  We will use github and [git](https://en.wikipedia.org/wiki/Git) for sharing code from this repository which you will edit then push to your own repository in order to hand in assignments. Instructions for setting up github and git, pulling this repository and creating your own repository can be found [here](https://github.com/kapelner/QC_Math_343_Spring_2024/blob/master/syllabus/git_github_class_setup.pdf) for MAC, Windows and Linux.
 
 
 ## Lectures
