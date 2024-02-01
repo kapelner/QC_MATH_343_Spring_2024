@@ -2,8 +2,6 @@ source("lec02_visualize_function.R")
 pacman::p_load(rstan, ggplot2)
 set.seed(1)
 
-### Hurdle Model
-
 n = 50
 
 #############we don't get to see the real DGP!

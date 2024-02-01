@@ -18,16 +18,15 @@ source("lec02_visualize_function.R")
 #via the package "rstan"). See
 #https://en.wikipedia.org/wiki/Stan_(software)
 pacman::p_load(rstan, ggplot2)
-example(stan_model, package = "rstan", run.dontrun = TRUE)
-#set working directory here!
+#on your computer... make sure the following line works otherwise stan is not 
+#installed correctly!
+# example(stan_model, package = "rstan", run.dontrun = TRUE)
 
 #let's take a look at these models we did fit with stan
 #unfortunately, stan doesn't support integer-valued parameters
 #so the Poisson change-point model as we defined it cannot be
 #fit in Stan (there are ways to still do fit that model but it's beyond
 #the scope of the course)
-
-### Hurdle Model
 
 n = 50
 
