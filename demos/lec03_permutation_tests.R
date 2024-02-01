@@ -153,5 +153,5 @@ for (nsim in 1 : Nsim){
 }
 rm(x, x_ind, x_ind_permutations, b, x_ind_b, x_ind_b1, x_ind_b2, x_b1, x_b2, thetahathat, nsim)
 
-mean(rejections_perm)
-mean(rejections_perm)
+mean(rejections_perm, na.rm = TRUE)
+mean(rejections_ks, na.rm = TRUE)
