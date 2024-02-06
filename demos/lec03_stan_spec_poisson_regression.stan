@@ -4,7 +4,6 @@ data {
   vector[n] t_time;       //the times of the measurements
   real<lower=0> sum_time; //the sum of all time variables
   vector[n] x;            //the count measurements
-
 }
 
 parameters {

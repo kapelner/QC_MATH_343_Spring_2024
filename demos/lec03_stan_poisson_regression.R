@@ -27,11 +27,14 @@ stan_model_data = list(
 #build the stan model object and run the sampler
 stan_fit = stan(
   seed = 1,
-  file = "lec02_stan_spec_poisson_regression.stan",
+  file = "lec03_stan_spec_poisson_regression.stan",
   model_name = "poisson_regression",
   data = stan_model_data,
   iter = 5000
 )
+
+plot(stan_fit)
+traceplot(stan_fit)
 
 #inference
 visualize_chain_and_compute_estimates_and_cr(extract(stan_fit)$theta_0, true_value = true_theta_0)

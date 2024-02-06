@@ -46,6 +46,8 @@ ggplot(data.frame(thetahathat_bs = thetahathat_bs)) +
   geom_vline(xintercept = thetahathat, col = "blue")
 
 #hence, we reject the null hypothesis
+#calc p-value
+2 * min(sum(thetahathat_bs > thetahathat), sum(thetahathat_bs < thetahathat)) / B
 
 rm(list = ls())
 
@@ -114,14 +116,17 @@ ggplot(data.frame(thetahathat_bs = thetahathat_bs)) +
   geom_vline(xintercept = ret_a, col = "red") + 
   geom_vline(xintercept = ret_b, col = "red") +
   geom_vline(xintercept = thetahathat, col = "blue")
-#reject H_0
+
+#hence we reject H_0
+#calc p-value
+2 * min(sum(thetahathat_bs > thetahathat), sum(thetahathat_bs < thetahathat)) / B
 
 ks.test(x1, x2)
 #retain H_0
 
 #it seems like the permutation test has higher power... let's see in a simulation
 
-Nsim = 1e3
+Nsim = 100
 alpha = 0.05
 rejections_perm = array(NA, Nsim)
 rejections_ks = array(NA, Nsim)
