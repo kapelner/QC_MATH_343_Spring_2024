@@ -5,10 +5,10 @@ set.seed(1)
 n = 100
 
 #############we don't get to see the real DGP!
-true_theta_0 = 0
+true_theta_0 = 1
 true_theta_1 = 4
 true_sigsq_0 = 2
-true_sigsq_1 = 1
+true_sigsq_1 = 3
 true_rho = 0.3
 
 x = array(NA, n)
@@ -35,8 +35,8 @@ sigsq1s = array(NA, num_tot_samples)
 rhos = array(NA, num_tot_samples)
 Is = matrix(NA, nrow = num_tot_samples, ncol = n)
 #start positions
-theta0s[1] = mean(x)
-theta1s[1] = mean(x)
+theta0s[1] = min(x)
+theta1s[1] = max(x)
 sigsq0s[1] = var(x)
 sigsq1s[1] = var(x)
 rhos[1] = 0.5
