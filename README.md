@@ -26,8 +26,8 @@ My lecture notes are scanned in as PDF files contributed by myself.
 * Lecture 8 [(notes)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/main/lectures/lec08.pdf)
 * Lecture 7 [(notes)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/main/lectures/lec07.pdf)
 * Lecture 6 [(notes)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/main/lectures/lec06.pdf)
-* Lecture 5 [(notes)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/main/lectures/lec05.pdf)
-* Lecture 4 [(notes)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/main/lectures/lec04.pdf)-->
+* Lecture 5 [(notes)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/main/lectures/lec05.pdf)-->
+* Lecture 4 [(notes)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/main/lectures/lec04.pdf)
 * Lecture 3 [(notes)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/main/lectures/lec03.pdf)
 * Lecture 2 [(notes)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/main/lectures/lec02.pdf)
 * Lecture 1 [(notes)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/main/lectures/lec01.pdf)
