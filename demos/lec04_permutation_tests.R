@@ -51,7 +51,8 @@ ggplot(data.frame(thetahathat_bs = thetahathat_bs)) +
 
 rm(list = ls())
 
-#when will the parametric test really pay the rent?
+#when will the parametric test really pay the rent? Another example to show you.
+
 set.seed(1)
 
 n1 = 10
