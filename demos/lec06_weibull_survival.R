@@ -65,8 +65,8 @@ loglik = function(thetavec){
 thetavec_0 = c(2, 2)
 #note we need an algorithm that allows for bounding the parameters
 #in the Weibull model, both k,lambda > 0 so we set lower = 0
-optimx_obj = optimx(thetavec_0, loglik, lower = 0, control = list(maximize = TRUE),
-       method = 'L-BFGS-B')
+optimx_obj = optimx(thetavec_0, loglik, lower = .Machine$double.eps, 
+      control = list(maximize = TRUE), method = 'L-BFGS-B')
 k_hat_hat_mle = optimx_obj$p1
 lambda_hat_hat_mle = optimx_obj$p2
        
@@ -76,6 +76,3 @@ theta_hat_hat_mle
 
 #real value
 true_theta
-
-
-
