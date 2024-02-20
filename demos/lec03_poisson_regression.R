@@ -32,7 +32,7 @@ theta1s[1] = 1
 sigma_mh = 0.5 #MH sampling variance
 #diagnostic data (useful to collect)
 accept_theta0s = array(TRUE, num_tot_samples)
-accept_theta2s = array(TRUE, num_tot_samples)
+accept_theta1s = array(TRUE, num_tot_samples)
 #functions that are useful
 ln_p_beta_0_beta_1_given_y_t_time = function(b0, b1){
 	sum(log(dpois(y, b0 + b1 * t_time)))
@@ -61,7 +61,7 @@ for (t in 2 : num_tot_samples){
 	if (is.nan(ln_r) || (runif(1) > exp(ln_r))){
 		#reject
 		theta1star = theta1_t
-		accept_theta2s[t] = FALSE
+		accept_theta1s[t] = FALSE
 	} #o/t accept
 	
 	#record this iteration

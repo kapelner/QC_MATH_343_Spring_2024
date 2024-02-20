@@ -32,8 +32,8 @@ theta_2s = array(NA, num_tot_samples)
 ###initialize thetas to best guesses
 theta_1s[1] = mean(x == 0)
 theta_1s[1]
-theta_2s[2] = mean(x[x > 0])
-theta_2s[2]
+theta_2s[1] = mean(x[x > 0])
+theta_2s[1]
 
 ##useful data to cache up top
 n0 = sum(x == 0)
