@@ -59,7 +59,7 @@ My lecture notes are scanned in as PDF files contributed by myself.
 
 ## Exams
 
-* Midterm I, Thursday, February 29 in class
+* Midterm I, Thursday, February 29 in class [(exam](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/exams/midterm1/midterm1.pdf) [(solutions)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/exams/midterm1/midterm1_solutions.pdf)
 * Midterm II, Thursday, April 4 in class
 * Final, tba
 

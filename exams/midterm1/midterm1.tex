@@ -1,0 +1,252 @@
+\documentclass[12pt]{article}
+
+\include{preamble}
+
+\newcommand{\instr}{\small Your answer will consist of a lowercase string (e.g. \texttt{aebgd}) where the order of the letters does not matter. \normalsize}
+
+\title{Math 343 / 643 Fall \the\year{} \\ Midterm Examination One}
+\author{Professor Adam Kapelner}
+
+\date{February 29, \the\year{}}
+
+\begin{document}
+\maketitle
+
+\noindent Full Name \line(1,0){410}
+
+\thispagestyle{empty}
+
+\section*{Code of Academic Integrity}
+
+\footnotesize
+Since the college is an academic community, its fundamental purpose is the pursuit of knowledge. Essential to the success of this educational mission is a commitment to the principles of academic integrity. Every member of the college community is responsible for upholding the highest standards of honesty at all times. Students, as members of the community, are also responsible for adhering to the principles and spirit of the following Code of Academic Integrity.
+
+Activities that have the effect or intention of interfering with education, pursuit of knowledge, or fair evaluation of a student's performance are prohibited. Examples of such activities include but are not limited to the following definitions:
+
+\paragraph{Cheating} Using or attempting to use unauthorized assistance, material, or study aids in examinations or other academic work or preventing, or attempting to prevent, another from using authorized assistance, material, or study aids. Example: using an unauthorized cheat sheet in a quiz or exam, altering a graded exam and resubmitting it for a better grade, etc.\\
+\\
+\noindent I acknowledge and agree to uphold this Code of Academic Integrity. \\~\\
+
+\begin{center}
+\line(1,0){350} ~~~ \line(1,0){100}\\
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~signature~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ date
+\end{center}
+
+\normalsize
+
+\section*{Instructions}
+This exam is 75 minutes (variable time per question) and closed-book. You are allowed \textbf{one} page (front and back) of a \qu{cheat sheet}, blank scrap paper (provided by the proctor) and a graphing calculator (which is not your smartphone). Please read the questions carefully. Within each problem, I recommend considering the questions that are easy first and then circling back to evaluate the harder ones. No food is allowed, only drinks. %If the question reads \qu{compute,} this means the solution will be a number otherwise you can leave the answer in \textit{any} widely accepted mathematical notation which could be resolved to an exact or approximate number with the use of a computer. I advise you to skip problems marked \qu{[Extra Credit]} until you have finished the other questions on the exam, then loop back and plug in all the holes. I also advise you to use pencil. The exam is 100 points total plus extra credit. Partial credit will be granted for incomplete answers on most of the questions. \fbox{Box} in your final answers. Good luck!
+
+\pagebreak
+
+\problem We are interested in understanding average churn (survival) in our monthly subscription business. Let $Y$ model the number of complete months a customer stays subscribed. $Y$ is discrete with $\support{Y} = \braces{0, 1, 2, \ldots}$. Zero indicates they canceled their subscription before the first month. There are $n=200$ customers in our sample.
+
+We take a sample today $y_1, \ldots, y_n$. Our business has been open three years, so the max survival will be $\max{y} = 36$. Also, people signed up at different times, so the subscriptions will be censored at all different values. Here's the raw data sorted:
+
+\footnotesize
+\begin{verbatim}
+  [1]  0   1   2   2   2   2   3   3+  3   3   4   4   5+  5   5   5   5   5   5   5   5   6 
+ [23]  6   6   6   6   6   7+  7   7   7   7   7   7   8   8   8   8   8+  8   8   8+  8   8+
+ [45]  9   9+  9   9   9   9   9+ 10  10  10  10+ 10+ 11  11  11  11+ 11  11  11+ 11  11+ 11 
+ [67] 11+ 11  12  12  12+ 12  12  12  12+ 12+ 12+ 12  13  13+ 13  13  13  13  13  13  13+ 13 
+ [89] 14+ 14  14+ 14  14+ 14  14+ 14  15  15+ 15  15+ 15  15  15  15  15+ 15  16  16+ 16  16 
+[111] 16  16+ 16  16  16  16  16  16+ 17  17  17+ 17  17+ 17+ 17  17+ 17  17  17  18  18+ 18+
+[133] 18+ 18  18  18  18+ 19  19+ 19+ 19+ 19  19  19+ 19+ 20  20+ 20  20+ 20  20  20  20+ 21+
+[155] 21+ 21+ 21  21+ 21  21+ 21+ 21+ 21  21+ 21  22  22+ 22+ 22  23  23+ 23+ 23+ 24  24  25+
+[177] 25  25+ 25+ 25+ 26+ 26  26+ 26  27  28+ 28+ 29+ 29+ 30+ 31  32+ 32+ 32+ 32+ 32+ 35+ 36+
+[199] 36+ 36+
+\end{verbatim}
+\normalsize
+
+\noindent The + signs indicate the specific $y_i$'s that are censored. Let $c_i$ denote the censoring vector which has the value 1 if censored and 0 if not censored. In total, there are $\sum_{i=1}^n c_i = 79$ censored observations of the total 200 observations. We first ignore censoring; i.e. we pretend $c_i = 0$ for all $i$. The empirical survival function $\hat{S}(y)$ is plotted below:
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=5.5in]{survival_censoring_ignored}
+\end{figure}
+
+\begin{enumerate}[(a)]
+
+\subquestionwithpoints{4} What is the estimated probability of a customer subscribing $\geq 1$yr?\spc{0.1}
+
+
+\subquestionwithpoints{6} Compute an approximate, asymptotically valid 95\% CI for the probability of surviving $>$10mo to three significant digits.\spc{3} %, i.e. $\doublehat{CI}_{S(10), 95\%}$. 
+
+
+\subquestionwithpoints{4} Is it possible to estimate the mean survival? Yes/no.\spc{-0.5}
+
+\subquestionwithpoints{4} Given that censoring was ignored, are the estimates in (a), (b) and (c) unbiased? Yes/no.\spc{-0.5}
+
+ \line(1,0){410} \\
+We now consider censoring in estimation. The Kaplan-Meier $\hat{S}(y)$ is plotted below:
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=5.5in]{survival_with_censoring}
+\end{figure}
+
+\subquestionwithpoints{4} What is the estimated probability of a customer subscribing $\geq 1$yr?\spc{0.3}
+
+\subquestionwithpoints{6} What is the estimated median survival of a customer (in \# of months)?\spc{0.3}
+
+\subquestionwithpoints{4} Is it possible to estimate the mean survival? Yes/no.\spc{0}
+ \line(1,0){410} \\
+We are interested in testing $H_a: \text{MED}\bracks{Y} \neq 1$yr. We run a bootstrap test. Below is the \texttt{R} code which makes use of the \texttt{survival} package. The objects \texttt{ys} and \texttt{c\_vec} are the vectors of $y_i$'s and $c_i$'s respectively.
+
+\footnotesize
+\begin{verbatim}
+B = 1e5
+median_bs = array(NA, B)
+idx = 1 : n
+for (b in 1 : B){
+  idx_b = sample(idx, n, replace = TRUE)
+  ys_b = ys[idx_b]
+  c_vec_b = c_vec[idx_b]
+  survival_fit_obj_b = survfit2(Surv(ys_b, 1 - c_vec_b) ~ 1) 
+  median_bs[b] = summary(survival_fit_obj_b)$table[7]  
+}
+\end{verbatim}
+\normalsize
+
+
+\subquestionwithpoints{4} How many bootstrap samples does this bootstrap test use?\spc{1} 
+
+
+Below are bootstrap samples' frequencies of the median.  
+
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=6.0in]{bootstraps}
+\end{figure}
+
+\subquestionwithpoints{6}  Consider the test $H_a: \text{MED}\bracks{Y} \neq 1$yr at level $\alpha = 5\%$. State the test decision.
+~\spc{1}
+
+ \line(1,0){410} \\
+We now consider the following parametric model for survival of our customers, 
+
+\beqn
+Y_1, \ldots, Y_n \iid \text{ExtNegBinom}(\theta_1, \theta_2) := p(y) &=& \frac{\Gammaf{y + \theta_1 - 1}}{y! \Gammaf{\theta_1}} (1 - \theta_2)^y \theta_2^{\theta_1}, \\
+F(y) &=& I_{\theta_2}(\theta_1, y + 1), ~~\expe{Y} = \frac{\theta_1 (1 - \theta_2)}{\theta_2}
+\eeqn
+
+\noindent where $I_a(b, c)$ is the regularized incomplete beta function. The parameter space is\\ $\theta_1 \in (0, \infty)$, $\theta_2 \in (0,1)$ and the support is $\support{Y} = \braces{0,1,2,\ldots}$.
+
+\subquestionwithpoints{8}  Find the likelihood function. Your answer must only be a function of the data, parameter(s), the factorial function, the gamma function and the regularized incomplete beta function and fundamental constants.
+
+\beqn
+\hspace{-1.5cm}\mathcal{L}(\theta_1, \theta_2; y_1, \ldots, y_n, c_1, \ldots, c_n) = \hspace{5in}
+\eeqn 
+~\spc{6}
+
+
+\subquestionwithpoints{4}  Using the likelihood function above, we take its log and use an optimizer to maximize it over $\theta_1, \theta_2$. We find $\thetahathatmle_1 = 4.128$ and $\thetahathatmle_2 = 0.271$. Find the maximum likelihood estimate of $\theta$, the mean subscription period measured in months to three significant digits.
+
+\beqn
+\hspace{-1.5cm}\thetahathatmle = \hspace{5in}
+\eeqn \spc{0.5}
+
+\end{enumerate}
+
+\problem We are trying to understand IQ in the army. We look at a sample of $n=100$ IQ scores which are normalized between the minimum score (coded as 0) and the maximum score (coded as 1). No one in the sample actually has the minimum nor the maximum score. Thus we assume the scores to be $\Xoneton$ as iid where $\support{X} = (0,1)$. Here is a histogram of the data.
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=5.5in]{hist}
+\end{figure}
+
+\noindent We believe the data has two modes so we fit the following model:
+
+\beqn
+\Xoneton \iid \theta \,\betanot{\alpha_1}{\beta_1} + (1-\theta) \,\betanot{\alpha_2}{\beta_2}
+\eeqn 
+
+\noindent and thus the likelihood and log likelihood are
+
+\beqn
+\mathcal{L} &=& \prod_{i=1}^n \parens{
+\theta \oneover{B(\alpha_1, \beta_1)}  x_i^{\alpha_1 - 1} (1-x_i)^{\beta_1 - 1} +
+(1 - \theta) \oneover{B(\alpha_2, \beta_2)} x_i^{\alpha_2 - 1} (1-x_i)^{\beta_2 - 1}
+} \\
+\ell &=& \sum_{i=1}^n \natlog{
+\theta \oneover{B(\alpha_1, \beta_1)}  x_i^{\alpha_1 - 1} (1-x_i)^{\beta_1 - 1} +
+(1 - \theta) \oneover{B(\alpha_2, \beta_2)} x_i^{\alpha_2 - 1} (1-x_i)^{\beta_2 - 1}
+}
+\eeqn
+
+\begin{enumerate}
+\subquestionwithpoints{4} What are the parameter(s) in this model?\spc{1}
+\subquestionwithpoints{4} What type of model is this called? (The answer is one or two words).\spc{1}
+
+\subquestionwithpoints{6} If you were to use data augmentation, how would you define $I_i$?
+
+\beqn
+\hspace{-1.5cm}I_i = \hspace{5in}
+\eeqn 
+~\spc{3}
+
+\subquestionwithpoints{4} After data augmentation and assuming flat priors on all parameters, you use MCMC to estimate the parameters. The $\alpha_1$ sampling step would be a ...  \\~\\ circle one of the two choices: Gibbs step / Metropolis-Hastings step.\spc{0}
+
+
+We now implement an MCMC for inference using the incredible \texttt{stan} software. Below is the first 500 samples in the $\beta_1$ chain:
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=6in]{beta_1}
+\end{figure}
+
+\subquestionwithpoints{4} Would this chain need to be burned in? Yes / no \spc{4}
+
+Here is the autocorrelation plot for the $\beta_1$ chain.
+
+\vspace{-0.5cm}
+\begin{figure}[htp]
+\centering
+\includegraphics[width=6in]{beta_1_acf}
+\end{figure}
+\vspace{-0.5cm}
+
+\subquestionwithpoints{4} At what number of samples should this chain be thinned? If the chain does not need to be thinned, write \qu{1} below. \spc{1}
+
+\subquestionwithpoints{4} After burning and thinning, are the samples considered iid? Yes / no. \spc{0}
+
+Here is the histogram of the $\beta_1$ chain after burning and thinning:
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=6in]{beta_1_posterior}
+\end{figure}
+
+\subquestionwithpoints{4} Estimate the MMSE for $\beta_1$. \spc{3}
+
+
+Here is the histogram of the $\theta$ chain after burning and thinning:
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=5.5in]{theta_posterior}
+\end{figure}
+
+
+\subquestionwithpoints{6} Estimate $CR_{\theta, 95\%}$.\spc{2}
+
+We are now interested in the difference of the two modes we observe in the data. Recall the mode of a beta distribution is given by $(\alpha-1)/(\alpha+\beta+2)$ if $\alpha, \beta >1$. We are very confident that both $\alpha_1, \beta_1, \alpha_2, \beta_2 >1$. We create a new parameter,
+
+\beqn
+\tau := \frac{\alpha_1-1}{\alpha_1+\beta_1+2} - \frac{\alpha_2-1}{\alpha_2+\beta_2+2}.
+\eeqn
+
+Using the MCMC samples, we compute the $\tau$'s and show a histogram of this new \emph{derived} chain after burning and thinning. The vertical line indicates the $\doublehat{\tau}^{MMSE}$:
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=5.5in]{tau_posterior}
+\end{figure}
+
+\subquestionwithpoints{6} Consider the test \qu{$H_a:$ the two modes are unequal} at level $\alpha = 5\%$. State the test decision.\spc{1}
+
+
+\end{enumerate}
+
+\end{document}
