@@ -97,7 +97,7 @@ We now consider censoring in estimation. The Kaplan-Meier $\hat{S}(y)$ is plotte
 
 \subquestionwithpoints{6} What is the estimated median survival of a customer (in \# of months)?\\
 
-\inred{35\%}
+\inred{10 or 11}
 
 \subquestionwithpoints{4} Is it possible to estimate the mean survival? Yes/\inred{\fbox{No}}\spc{0}
  \line(1,0){410} \\
@@ -153,7 +153,7 @@ F(y) &=& I_{\theta_2}(\theta_1, y + 1), ~~\expe{Y} = \frac{\theta_1 (1 - \theta_
 \prod_{\braces{i : c_i = 0}}
 \frac{\Gammaf{y_i + \theta_1 - 1}}{y_i! \Gammaf{\theta_1}} (1 - \theta_2)^{y_i} \theta_2^{\theta_1}
 \prod_{\braces{i : c_i = 1}}
-I_{\theta_2}(\theta_1, y_i + 1)
+\parens{1 - I_{\theta_2}(\theta_1, y_i + 1)}
 }
 \eeqn 
 ~\spc{6}

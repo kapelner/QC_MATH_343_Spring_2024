@@ -21,8 +21,8 @@ My lecture notes are scanned in as PDF files contributed by myself.
 * Lecture 13 [(notes)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/lectures/lec13.pdf)
 * Lecture 12 [(notes)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/lectures/lec12.pdf)
 * Lecture 11 [(notes)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/lectures/lec11.pdf)
-* Lecture 10 [(notes)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/lectures/lec10.pdf)
-* Lecture 9 [(notes)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/lectures/lec09.pdf)-->
+* Lecture 10 [(notes)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/lectures/lec10.pdf)-->
+* Lecture 9 [(notes)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/lectures/lec09.pdf)
 * Lecture 8 [(notes)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/lectures/lec08.pdf)
 * Lecture 7 [(notes)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/lectures/lec07.pdf)
 * Lecture 6 [(notes)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/lectures/lec06.pdf)
@@ -59,7 +59,7 @@ My lecture notes are scanned in as PDF files contributed by myself.
 
 ## Exams
 
-* Midterm I, Thursday, February 29 in class [(exam](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/exams/midterm1/midterm1.pdf) [(solutions)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/exams/midterm1/midterm1_solutions.pdf)
+* Midterm I, Thursday, February 29 in class [(exam)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/exams/midterm1/midterm1.pdf) [(solutions)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/exams/midterm1/midterm1_solutions.pdf)
 * Midterm II, Thursday, April 4 in class
 * Final, tba
 
