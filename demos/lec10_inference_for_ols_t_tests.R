@@ -147,22 +147,3 @@ pval1
 
 #check with the authority
 summary(lm(y ~ 0 + X))
-
-
-#now let's investigate i = 17 => x_i = ...
-x_i = X[17, 2]
-x_i
-#what is the predicted value?
-yhat_i = as.numeric(X[17, ] %*% b)
-yhat_i
-#this is the best guess of both y_i and mu_i := h*(x_i) = expected response 
-#mu_i means the average of infinite responses generated from this x_i
-
-#let's make a 95% confidence interval for mu_i
-yhat_i + c(-1, +1) *
-  t_one_minus_alpha_over_two_df * s_e * sqrt(H[17, 17])
-
-
-  
-  
-  
