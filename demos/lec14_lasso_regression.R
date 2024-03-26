@@ -2,35 +2,46 @@
 # https://scholar.google.com/scholar?hl=en&as_sdt=7%2C39&q=Regression+Shrinkage+and+Selection+Via+the+Lasso&btnG=
 # Definitely a smash hit!
 
+#let's compare the shrinkage of lasso and ridge
 n = 100
 x = rnorm(n)
 true_beta_1 = 0.3 #assume intercept is zero and known for purposes of this demo
 y = true_beta_1 * x + rnorm(n)
-lambda = 0
+lambda_lasso = 50
+lambda_ridge = 100
 
 RES = 500
 possible_betas = seq(-2, 2, length.out = RES)
 sse_terms = array(NA, RES)
-abs_regular_terms = array(NA, RES)
+lasso_abs_regular_terms = array(NA, RES)
+ridge_sq_regular_terms = array(NA, RES)
 lasso_objective_funs = array(NA, RES)
+ridge_objective_funs = array(NA, RES)
 for (k in 1 : RES){
   sse_terms[k] = sum((y - x * possible_betas[k])^2)
-  abs_regular_terms[k] = lambda * abs(possible_betas[k])
-  lasso_objective_funs[k] = sse_terms[k] + abs_regular_terms[k]
+  lasso_abs_regular_terms[k] = lambda_lasso * abs(possible_betas[k])
+  ridge_sq_regular_terms[k] =  lambda_ridge * possible_betas[k]^2
+  lasso_objective_funs[k] =    sse_terms[k] + lasso_abs_regular_terms[k]
+  ridge_objective_funs[k] =    sse_terms[k] + ridge_sq_regular_terms[k]
 }
 betahathat_lasso = possible_betas[which.min(lasso_objective_funs)]
+betahathat_ridge = possible_betas[which.min(ridge_objective_funs)]
 
-pacman::p_load(data.table)
+pacman::p_load(ggplot2, data.table)
 ggplot(melt(data.table(
   beta = possible_betas, 
   sse = sse_terms,
-  abs_regular = abs_regular_terms,
-  lasso_objective_fun = lasso_objective_funs
+  abs_regular = lasso_abs_regular_terms,
+  sq_regular = ridge_sq_regular_terms,
+  lasso_objective_fun = lasso_objective_funs,
+  ridge_objective_funs = ridge_objective_funs
 ), id.vars = c("beta"))) +
   geom_line(aes(x = beta, y = value, color = variable), lwd = 2) +
   geom_vline(xintercept = 0, col = "grey") +
-  geom_vline(xintercept = betahathat_lasso, col = "brown") +
-  geom_vline(xintercept = true_beta_1, col = "orange")
+  geom_vline(xintercept = betahathat_lasso, col = "blue") +
+  geom_vline(xintercept = betahathat_ridge, col = "purple") +
+  geom_vline(xintercept = true_beta_1, col = "orange") +
+  xlim(-0.5, 1)
 
 #Let's do this same boston housing data demo using the lasso. There is no closed form solution 
 #so we will use the numerical optimization found in the `glmnet` package.
