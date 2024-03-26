@@ -1,3 +1,4 @@
+## Robust Regression Demos
 
 X = model.matrix(medv ~ ., MASS::Boston)
 n = nrow(X)
@@ -137,6 +138,12 @@ chisq_test_stat = 1 / s_e^2 * as.numeric(t(b_S) %*% XtXinv_S_cross_S_inv %*% b_S
 summary(lm(full_mod$residuals^2 ~ . - medv, MASS::Boston))
 pacman::p_load(lmtest, sandwich)
 bptest(full_mod)
+ggplot(data.frame(e = e, x = X[, "rm"])) + aes(x = x, y = e) + geom_point()
+#see that fanning pattern? that's heteroskedasticity
+ggplot(data.frame(e = e, x = X[, "lstat"])) + aes(x = x, y = e) + geom_point()
+#this is indicative of misspecification error and heteroskedasticity
+ggplot(data.frame(e = e, x = X[, "ptratio"])) + aes(x = x, y = e) + geom_point()
+#definite heteroskedasticity!
 #conclusion: the errors are heteroskedastic => the lm inference is wrong
 
 ols_asymp_huber_results = matrix(nrow = p_plus_one, ncol = 4)

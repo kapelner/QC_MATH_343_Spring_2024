@@ -5,12 +5,15 @@ pima$type = ifelse(pima$type == "Yes", 1, 0)
 p = ncol(pima) - 1 #-1 for the response
 p
 
-#and let's fit a model on all features
+#since we're doing bernoulli regression, we need a link function
 family_function = binomial(link = "logit")
 
+#and let's fit the generalized linear model on all features
 full_mod = glm(type ~ ., pima, family = family_function)
 summary(full_mod)
-#here are the Wald tests that are computed via the sqrt of the diagonal entries from the Fisher information matrix
+#it displays the Wald tests that are computed via the sqrt of the diagonal 
+#entries from the Fisher information matrix and computing the matrix is not super difficult;
+#see here: https://web.stanford.edu/class/archive/stats/stats200/stats200.1172/Lecture26.pdf
 
 #notice how we have the log likelihood easily accessible from R
 as.numeric(logLik(full_mod))
