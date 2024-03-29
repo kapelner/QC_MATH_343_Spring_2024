@@ -14,8 +14,8 @@ My lecture notes are scanned in as PDF files contributed by myself.
 * Lecture 20 [(notes)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/lectures/lec20.pdf)
 * Lecture 19 [(notes)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/lectures/lec19.pdf)
 * Lecture 18 [(notes)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/lectures/lec18.pdf)
-* Lecture 17 [(notes)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/lectures/lec17.pdf)
-* Lecture 16 [(notes)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/lectures/lec16.pdf)-->
+* Lecture 17 [(notes)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/lectures/lec17.pdf)-->
+* Lecture 16 [(notes)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/lectures/lec16.pdf)
 * Lecture 15 [(notes)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/lectures/lec15.pdf)
 * Lecture 14 [(notes)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/lectures/lec14.pdf)
 * Lecture 13 [(notes)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/lectures/lec13.pdf)
@@ -40,7 +40,7 @@ My lecture notes are scanned in as PDF files contributed by myself.
 * Homework 5 [(download)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/homeworks/hw05/hw05t.pdf?raw=true) [(view)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/homeworks/hw05/hw05t.pdf) (due 11/16)
 * Homework 4 [(download)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/homeworks/hw04/hw04t.pdf?raw=true) [(view)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/homeworks/hw04/hw04t.pdf) (due 11/2)
 * Homework 3 [(download)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/homeworks/hw03/hw03t.pdf?raw=true) [(view)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/homeworks/hw03/hw03t.pdf) (due 10/8)-->
-* PARTIAL Homework 2 [(download)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/homeworks/hw02/hw02t.pdf?raw=true) [(view)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/homeworks/hw02/hw02t.pdf) (due 4/10)
+* Homework 2 [(download)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/homeworks/hw02/hw02t.pdf?raw=true) [(view)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/homeworks/hw02/hw02t.pdf) (due 4/10)
 * Homework 1 [(download)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/homeworks/hw01/hw01t.pdf?raw=true) [(view)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/homeworks/hw01/hw01t.pdf) (due 3/3)
 
 ## Labs
