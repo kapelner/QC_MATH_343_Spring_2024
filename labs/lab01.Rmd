@@ -5,17 +5,17 @@ output: pdf_document
 date: "11:59PM March 3"
 ---
 
-This practice assignment is coupled to the theory assignment and should be worked on concomitantly.
+This practice assignment is coupled to the theory assignment (the problem numbers align herein) and should be worked on concomitantly.
 
-You should have R and RStudio (latest versions) installed to edit this file. You will write code in places marked "TO-DO" to complete the problems. Most of this will be a pure programming assignment but there are some questions that instead ask you to "write a few sentences" which are not R chunks. This is a W class! 
+You should have R and RStudio (latest versions) installed to edit this file. You will write code in places marked "TO-DO" to complete the problems. Most of this will be a pure programming assignment but there are some questions that instead ask you to "write a few sentences" which are not R chunks.
 
-The tools for solving these problems can be found in the class practice lectures. I prefer you to use the methods I taught you. If you google and find esoteric code you don't understand or if you use chat GPT, this doesn't do you too much good in the long run.
+The tools for solving these problems can be found in the class demos located [here](https://github.com/kapelner/QC_MATH_343_Spring_2024/tree/main/demos). I prefer you to follow the methods from these examples. If you google and find esoteric code you don't understand or if you use chat GPT, this doesn't do you too much good in the long run.
 
 To "hand in" the homework, you should follow the github repo setup instructions on the course homepage. Once you have your own class repo e.g. located in ~, make a /labs directory. Then go back to ~ and clone the class repo. Then copy this file into your repo/labs directory. Edits made there can be committed and pushed. You must push this completed file by the due date to avoid late penalties. 
 
 NOT REQUIRED: After you're done, you have the option to compile this file into a PDF (use the "knit to PDF" button on the submenu above). These final PDF's look pretty as it includes the output of your code. You can push the PDF as well. It will look nice in your portfolio.
 
-This lab requires the following packages. You should make they load now:
+This lab requires the following packages. You should make sure they load before beginning:
 
 ```{r}
 pacman::p_load(ggplot2, rstan, survival, optimx)

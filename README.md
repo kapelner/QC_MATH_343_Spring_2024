@@ -53,15 +53,15 @@ My lecture notes are scanned in as PDF files contributed by myself.
 * [(Lab 6, due 4/10)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/labs/lab06.Rmd)
 * [(Lab 5, due 4/3)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/labs/lab05.Rmd)
 
-* [Lab 3, due 3/13](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/labs/lab03.Rmd)
-* [Lab 2, due 3/06](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/labs/lab02.Rmd)  -->
+* [Lab 3, due 3/13](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/labs/lab03.Rmd) -->
+* [Lab 2, due 4/11](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/labs/lab02.Rmd) 
 * [Lab 1, due 3/3](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/labs/lab01.Rmd)
 
 ## Exams
 
 * Midterm I, Thursday, February 29 in class [(exam)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/exams/midterm1/midterm1.pdf) [(solutions)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/exams/midterm1/midterm1_solutions.pdf)
 * Midterm II, Tuesday, April 9 in class
-* Final, tba
+* Final, Thursday, May 16 6-8PM in KY258
 
 ## Office Hours
 

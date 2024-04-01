@@ -147,10 +147,10 @@ mean(subset(lung, status == 1)$time)
 anova(full_mod, null_mod)
 #the features matter!
 
-#let's do a partial effects test - all those variables that don't seem to matter
+#let's do a partial effects test - remove all those variables that don't seem to matter
 red_mod = survreg(surv_obj ~ inst + sex + ph.ecog + ph.karno + wt.loss, lung)
 summary(red_mod)
 
 anova(full_mod, red_mod)
-#the left out features don't seem to affect predictive performance
+#the left out features don't seem to affect survival predictions
 
