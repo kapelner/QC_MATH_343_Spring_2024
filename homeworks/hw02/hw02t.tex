@@ -204,11 +204,11 @@ $.}\spc{6}
 
 \intermediatesubproblem{Given the assumptions in (a), write the likelihood ratio estimate for the omnibus test of $H_0: \beta_1 = \beta_2 = \ldots = \beta_p = 0$.}\spc{6}
 
-\intermediatesubproblem{Let $Y_i \inddist \poisson{\theta_i}$ for $i = 1, \ldots, n$ where $\theta_i = e^{\x_i \bbeta}$ and $\x_i \in \reals^{3}$ whose first entry is always 1. Write out the likelihood ratio when testing $H_0: \beta_2 = \beta_3 = 0$.}\spc{5}
+\intermediatesubproblem{Let $Y_i \inddist \poisson{\theta_i}$ for $i = 1, \ldots, n$ where $\theta_i = e^{\x_i \bbeta}$ and $\x_i \in \reals^{p+1}$ whose first entry is always 1. Write out the likelihood ratio when testing $H_0: \beta_2 = \beta_3 = 0$.}\spc{5}
 
-\intermediatesubproblem{Let $Y_i \inddist \weibullnot{k}{\theta_i}$ for $i = 1, \ldots, n$ where $\theta_i = e^{\x_i \bbeta}$ and $\x_i \in \reals^{3}$ whose first entry is always 1. This uses the alternate parameterization so that $\expe{Y_i} = \theta_i \Gamma(1 + 1/k)$. There is a censoring vector $\bv{c}$ which is 1 when censored on the right (meaning the real $y_i$ is $\geq $ to the observed $y_i$) and 0 when not censored. Write out the likelihood ratio when testing $H_0: \beta_2 = \beta_3 = 0$. }\spc{6}
+\intermediatesubproblem{Let $Y_i \inddist \weibullnot{k}{\theta_i}$ for $i = 1, \ldots, n$ where $\theta_i = e^{\x_i \bbeta}$ and $\x_i \in \reals^{p+1}$ whose first entry is always 1. This uses the alternate parameterization so that $\expe{Y_i} = \theta_i \Gamma(1 + 1/k)$. There is a censoring vector $\bv{c}$ which is 1 when censored on the right (meaning the real $y_i$ is $\geq $ to the observed $y_i$) and 0 when not censored. Write out the likelihood ratio when testing $H_0: \beta_2 = \beta_3 = 0$. }\spc{6}
 
-\hardsubproblem{[MA] Let $Y_i \inddist \normnot{\theta_i}{\sigsq}$ for $i = 1, \ldots, n$ where $\theta_i = \x_i \bbeta$. This is the regular linear model. However there is a censoring vector $\bv{c}$ which is 1 when censored on the right (meaning the real $y_i$ is $\geq $ to the observed $y_i$) and 0 when not censored. This is called the \href{https://en.wikipedia.org/wiki/Tobit_model}{Tobit model}. Write the likelihood ratio estimate for the omnibus test of $H_0: \beta_1 = \beta_2 = \ldots = \beta_p = 0$.}\spc{6}
+\hardsubproblem{[MA] Let $Y_i \inddist \normnot{\theta_i}{\sigsq}$ for $i = 1, \ldots, n$ where $\theta_i = \x_i \bbeta$ and $\x_i \in \reals^{p+1}$ whose first entry is always 1. So far, this is the vanilla linear model. However, consider now a wrinkle: there is a censoring vector $\bv{c}$ which is 1 when censored on the right (meaning the real $y_i$ is $\geq $ to the observed $y_i$) and 0 when not censored. This is called the \href{https://en.wikipedia.org/wiki/Tobit_model}{Tobit model}. Write the likelihood ratio estimate for the omnibus test of $H_0: \beta_1 = \beta_2 = \ldots = \beta_p = 0$.}\spc{6}
 \end{enumerate}
 
 
