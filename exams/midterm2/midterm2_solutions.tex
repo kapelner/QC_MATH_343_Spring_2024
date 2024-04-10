@@ -1,0 +1,458 @@
+\documentclass[12pt]{article}
+
+\include{preamble}
+
+\newcommand{\instr}{\small Your answer will consist of a lowercase string (e.g. \texttt{aebgd}) where the order of the letters does not matter. \normalsize}
+
+\title{Math 343 / 643 Fall \the\year{} \\ Midterm Examination Two \inred{Solutions}}
+\author{Professor Adam Kapelner}
+
+\date{April 9, \the\year{}}
+
+\begin{document}
+\maketitle
+
+\noindent Full Name \line(1,0){410}
+
+\thispagestyle{empty}
+
+\section*{Code of Academic Integrity}
+
+\footnotesize
+Since the college is an academic community, its fundamental purpose is the pursuit of knowledge. Essential to the success of this educational mission is a commitment to the principles of academic integrity. Every member of the college community is responsible for upholding the highest standards of honesty at all times. Students, as members of the community, are also responsible for adhering to the principles and spirit of the following Code of Academic Integrity.
+
+Activities that have the effect or intention of interfering with education, pursuit of knowledge, or fair evaluation of a student's performance are prohibited. Examples of such activities include but are not limited to the following definitions:
+
+\paragraph{Cheating} Using or attempting to use unauthorized assistance, material, or study aids in examinations or other academic work or preventing, or attempting to prevent, another from using authorized assistance, material, or study aids. Example: using an unauthorized cheat sheet in a quiz or exam, altering a graded exam and resubmitting it for a better grade, etc.\\
+\\
+\noindent I acknowledge and agree to uphold this Code of Academic Integrity. \\~\\
+
+\begin{center}
+\line(1,0){350} ~~~ \line(1,0){100}\\
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~signature~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ date
+\end{center}
+
+\normalsize
+
+\section*{Instructions}
+This exam is 75 minutes and closed-book. You are allowed \textbf{one} page (front and back) of a \qu{cheat sheet}, blank scrap paper (provided by the proctor) and a graphing calculator (which is not your smartphone). Please read the questions carefully. Within each problem, I recommend considering the questions that are easy first and then circling back to evaluate the harder ones. No food is allowed, only drinks. %If the question reads \qu{compute,} this means the solution will be a number otherwise you can leave the answer in \textit{any} widely accepted mathematical notation which could be resolved to an exact or approximate number with the use of a computer. I advise you to skip problems marked \qu{[Extra Credit]} until you have finished the other questions on the exam, then loop back and plug in all the holes. I also advise you to use pencil. The exam is 100 points total plus extra credit. Partial credit will be granted for incomplete answers on most of the questions. \fbox{Box} in your final answers. Good luck!
+
+\pagebreak
+
+\problem Consider the following matrix of constant measurements:
+
+\beqn
+\X := \bracks{\onevec_n~|~\x_{\cdot 1}~|~\ldots~|~ \x_{\cdot p}}
+\eeqn
+
+\noindent with column indices $0, 1, \ldots, p$ and row indices $1, 2, \ldots, n$. We assume also a continuous (real-valued) response model which is linear in these measurements, i.e.
+
+\beqn
+\Y = \X\bbeta + \berrorrv.
+\eeqn
+
+\noindent For the error term, we assume the \qu{core assumption},
+
+\beqn
+\berrorrv \sim \multnormnot{n}{\zerovec_n}{\sigsq \I_n}.
+\eeqn
+
+\noindent And for our estimator of $\bbeta$, we choose:
+
+\beqn
+\B := \XtXinvXt \Y 
+\eeqn
+
+\begin{enumerate}[(a)]
+
+\subquestionwithpoints{5} In the \qu{linear response model assumption line} above, list the scalar parameters (if the parameter is a vector, list the scalar entries). If there are no parameters, write \qu{none}.\\
+
+\inred{$\beta_0, \beta_1, \ldots, \beta_p$}
+
+\subquestionwithpoints{5} In the \qu{core assumption} line above, list the scalar parameters (if the parameter is a vector, list the scalar entries). If there are no parameters, write \qu{none}.\\
+
+\inred{$\sigsq$}
+
+\subquestionwithpoints{5} In the \qu{our estimator} line above, list the scalar parameters (if the parameter is a vector, list the scalar entries). If there are no parameters, write \qu{none}. \\
+
+\inred{none}
+
+\subquestionwithpoints{10} Show that $\B$ is unbiased.
+
+\inred{
+\beqn
+\expe{\B} &=& \expe{\XtXinvXt \Y} \\
+&=& \expe{\XtXinvXt (\X\bbeta + \berrorrv)}\\
+&=& \XtXinvXt\X\bbeta + \XtXinvXt\expe{\berrorrv}\\
+&=& \bbeta + \XtXinvXt\zerovec_n\\
+&=& \bbeta
+\eeqn
+}
+
+\pagebreak 
+
+\noindent Now choose the following estimator instead
+
+\beqn
+\B_{\text{ridge}} := \inverse{\XtX + \lambda \I_{p+1}} \Xt \Y ~~\text{where}~\lambda > 0.
+\eeqn
+
+
+\subquestionwithpoints{6} Which of these two will be larger: $\normsq{\B}$ or $\normsq{\B_{\text{ridge}}}$? \\
+
+\inred{$\normsq{\B}$}
+
+
+\end{enumerate}
+
+
+\problem This problem will analyze data from a study that investigated tooth cell growth (in length) in guinea pigs by vitamin C dose (0.5, 1 or 2mg/d) and delivery method (OJ = orange juice or VC = vitamin capsule). Here is the results of an OLS model fit to both dose and delivery method:
+
+\begin{Verbatim}[frame=single]
+                Estimate Std. Error t value Pr(>|t|)    
+(Intercept)       9.2725     1.2824   7.231 1.31e-09 ***
+deliveryVC       -3.7000     1.0936  -3.383   0.0013 ** 
+dose              9.7636     0.8768  11.135 6.31e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 4.236 on 57 degrees of freedom
+Multiple R-squared:  0.7038,	Adjusted R-squared:  0.6934 
+F-statistic: 67.72 on 2 and 57 DF,  p-value: 8.716e-16
+\end{Verbatim}
+
+\noindent Unless otherwise noted, assume that $\berrorrv \sim \multnormnot{n}{\zerovec_n}{\sigsq \I_n}$. 
+Let $\X$ denote the design matrix for this linear regression. The following quantities may be useful:
+
+\beqn
+\XtX = \bracks{\begin{array}{ccc} 60 & 30 & 70 \\ 30 & 30 & 30 \\ 70 & 35 & 105 \end{array}}, ~~~
+\XtXinv = \bracks{\begin{array}{ccc} ~~0.09 & -0.03 &-0.05 \\ -0.03 &  ~~0.07 & ~~0.00 \\ -0.05 &  ~~0.00 & ~~0.04 \end{array}}, 
+\eeqn
+
+\begin{enumerate}[(a)]
+
+\subquestionwithpoints{5} What is the sample size $n$ of this dataset? \inred{57 + (2 +1) = 60}
+
+\subquestionwithpoints{5} Test $H_0: \beta_{\text{dose}} = 0$ at $\alpha = 5\%$.\\
+
+\inred{This was done for us in the results printed above. The p-value is $6.31 \times 10^{-16} < \alpha = 0.05$ hence $H_0$ is rejected.}
+
+
+\subquestionwithpoints{5} Create a 95\% CI for the effect of delivery being a vitamin capsule instead of orange juice. The t-value to use in this computation is 2.00.\\
+
+\inred{$\bracks{-3.70 \pm 2.00 \cdot 1.09} = \bracks{-5.88, -1.52}$}
+\pagebreak 
+
+\subquestionwithpoints{5} Run the omnibus test at $\alpha = 5\%$. \\
+
+\inred{This was done for us in the results printed above. The p-value is $8.716 \times 10^{-16} < \alpha = 0.05$ hence $H_0$ is rejected.}
+
+\subquestionwithpoints{10} For a guinea pig who was given orange juice and 1mg of vitamin C, provide a 95\% CI for the guinea pig's tooth cell growth. The t-value to use in this computation is 2.00.
+
+\inred{
+\beqn
+CI_{y_\star, 95\%} &=& \bracks{\hat{y} \pm t_{1-\alpha/2, n - (p+1)} \cdot s_e\sqrt{1 + \x_\star^\top \XtXinv \x_\star}} \\
+&=& \bracks{(9.2725 + 9.7636) \pm 2.00 \cdot 4.236 \sqrt{1 +\bracks{1~0~1} \bracks{\begin{array}{ccc} ~~0.09 & -0.03 &-0.05 \\ -0.03 &  ~~0.07 & ~~0.00 \\ -0.05 &  ~~0.00 & ~~0.04 \end{array}} \threevec{1}{0}{1}}} \\
+&=& \bracks{19.0361 \pm 2 \cdot 4.236 \sqrt{1.03}} \\
+&=& \bracks{10.438, 27.634}
+\eeqn
+}
+
+\subquestionwithpoints{10} Assuming independence of errors and homoskedasticity of errors, test $H_0: \beta_{\text{dose}} = 10$ at $\alpha = 5\%$. 
+
+\inred{
+We can use the Wald test (but we cannot use the t-test):
+
+\beqn
+\frac{B_j - \beta_j}{\se{B_j}} \approxdist \stdnormnot \mathimplies \frac{9.7636 - 10}{0.8768} = -0.2696 \in \bracks{-1.96,1.96}
+\eeqn
+
+Thus we fail to reject $H_0$.
+}
+
+
+\subquestionwithpoints{5} Is there enough information here to test $H_0: \beta_{\text{dose}} = 0$ at $\alpha = 5\%$ if we assume independent, mean-centered and heteroskedastic errors? Yes / \inred{\fbox{No}} \spc{0}
+
+In reality, we are unsure of the distribution of the errors but we know that due to the way the data was sampled, we are guaranteed that the errors are independent. Hence use a bootstrap. We are interested in inference for the effect of delibery being a vitamin capsule instead of orange juice. The top of the following page shows the result of 1,000 boostrap samples where each time, the OLS for this effect was computed. The vertical lines indicate the empirical 2.5\%ile and 97.5\%ile.
+\pagebreak 
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=6.5in]{bootstrap}
+\end{figure}
+\FloatBarrier
+
+
+\subquestionwithpoints{5} Using the boostrap samples, test $H_0: \beta$ for vitamin capsule delivery is zero at $\alpha = 5\%$. \\
+
+\inred{$H_0$ is rejected because $0 \notin CI_{\beta, 1-\alpha} = \bracks{-5.9, -1.7}$.}
+
+
+\end{enumerate}
+
+\problem This problem will analyze data from a study that investigated the number of yarn breaks by two features: type of yarn wool (A or B) and amount of tension (L = low, M = medium, H = high). Since the response being modeled is a count, we choose a negative binomial model which is more flexible than a Poission model. We parameterize the negative binomial with parameters $r, \theta$ where its expectation is $\theta$. We link $\theta$ to the two features using the link $\theta_i = e^{\x_i \bbeta}$ for $i = 1, \ldots, n$. Below is the summary for the inference of $\bbeta$ for both features (the inference for $r$ is omitted). We also display the log-likelihood of this model.
+
+\begin{Verbatim}[frame=single]
+            Estimate Std. Error z value Pr(>|z|)    
+(Intercept)   3.6734     0.0979  37.520  < 2e-16 ***
+woolB        -0.1862     0.1010  -1.844   0.0651 .  
+tensionM     -0.2992     0.1217  -2.458   0.0140 *  
+tensionH     -0.5114     0.1237  -4.133 3.58e-05 ***
+
+'log Lik.' -199.3819 (df=5)
+\end{Verbatim}
+
+\noindent Here are outputs for two other models:
+
+\begin{Verbatim}[frame=single]
+            Estimate Std. Error z value Pr(>|z|)    
+(Intercept)  3.43518    0.08071  42.562   <2e-16 ***
+woolB       -0.20599    0.11533  -1.786   0.0741 .  
+
+'log Lik.' -206.9874 (df=3)
+\end{Verbatim}
+\pagebreak 
+
+\begin{Verbatim}[frame=single]
+            Estimate Std. Error z value Pr(>|z|)    
+(Intercept)  3.59426    0.08715  41.243  < 2e-16 ***
+tensionM    -0.32132    0.12557  -2.559   0.0105 *  
+tensionH    -0.51849    0.12739  -4.070  4.7e-05 *** 
+
+'log Lik.' -201.0109 (df=4)
+\end{Verbatim}
+
+\noindent Here are some values of the inverse CDF of the $\chisq{df}$ distribution:
+
+\begin{Verbatim}[frame=single,fontsize=\footnotesize]
+                Probability less than the critical value
+  df          0.90      0.95     0.975      0.99     0.999
+----------------------------------------------------------
+  1          2.706     3.841     5.024     6.635    10.828
+  2          4.605     5.991     7.378     9.210    13.816
+  3          6.251     7.815     9.348    11.345    16.266
+  4          7.779     9.488    11.143    13.277    18.467
+  5          9.236    11.070    12.833    15.086    20.515
+  6         10.645    12.592    14.449    16.812    22.458
+  7         12.017    14.067    16.013    18.475    24.322
+\end{Verbatim}
+
+\begin{enumerate}[(a)]
+
+\subquestionwithpoints{4} Is the parameter $r$ a nuisance parameter? \inred{\fbox{Yes}} / No \spc{-0.5}
+
+\subquestionwithpoints{6} Calculate the likelihood ratio test statistic for the test that tension has no effect on number of yarn breaks. \\
+
+\inred{$\doublehat{\Lambda} = 2(\natlog{\mathcal{L}_{\text{full}}} - \natlog{\mathcal{L}_{\text{reduced}}}) = 2(-199.3819 - -206.9874) = 15.211$}
+
+\subquestionwithpoints{3} Test the null hypothesis that tension has no effect on number of yarn breaks at $\alpha=5\%$. Justify your answer.  \\
+
+\inred{The difference in df of full to reduced is 2. Hence the likelihood ratio estimator is asymptotically distributed as $\chisq{2}$. At $\alpha=5\%$, according to the table, the critical cutoff value is 5.991. We found the LRT statistic to be 15.211 which is greater. Hence, we reject $H_0$.}
+
+
+
+\subquestionwithpoints{6} The maximum likelihood estimate of $r$ is 9.94. Given a piece of yarn with wool type B and low tension, predict the number of yarn breaks it will have to the nearest number of yarn breaks.   \\
+
+\inred{$y_\star = \text{round}(e^{\x_\star \b}) = \text{round}(e^{3.6734 + -0.1862}) = \text{round}(32.6943) = 33$}
+
+
+\end{enumerate}
+\end{document}
+
+* test some betaJ is nonzero* test some betaJ is pi* make 95% ci for betaJ* test the omnibus * give x-star and calculate 95% ci for mean* ditto for response* find p val of one sided Rsq. Leave answer as pbeta 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+\noindent The + signs indicate the specific $y_i$'s that are censored. Let $c_i$ denote the censoring vector which has the value 1 if censored and 0 if not censored. In total, there are $\sum_{i=1}^n c_i = 79$ censored observations of the total 200 observations. We first ignore censoring; i.e. we pretend $c_i = 0$ for all $i$. The empirical survival function $\hat{S}(y)$ is plotted below:
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=5.5in]{survival_censoring_ignored}
+\end{figure}
+
+\begin{enumerate}[(a)]
+
+\subquestionwithpoints{5} What is the estimated probability of a customer subscribing $\geq 1$yr?\spc{0.1}
+
+
+\subquestionwithpoints{7} Compute an approximate, asymptotically valid 95\% CI for the probability of surviving $>$10mo to three significant digits.\spc{3} %, i.e. $\doublehat{CI}_{S(10), 95\%}$. 
+
+
+\subquestionwithpoints{5} Is it possible to estimate the mean survival? Yes/no.\spc{-0.5}
+
+\subquestionwithpoints{5} Given that censoring was ignored, are the estimates in (a), (b) and (c) unbiased? Yes/no.\spc{-0.5}
+
+ \line(1,0){410} \\
+We now consider censoring in estimation. The Kaplan-Meier $\hat{S}(y)$ is plotted below:
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=5.5in]{survival_with_censoring}
+\end{figure}
+
+\subquestionwithpoints{5} What is the estimated probability of a customer subscribing $\geq 1$yr?\spc{0.3}
+
+\subquestionwithpoints{7} What is the estimated median survival of a customer (in \# of months)?\spc{0.3}
+
+\subquestionwithpoints{5} Is it possible to estimate the mean survival? Yes/no.\spc{0}
+ \line(1,0){410} \\
+We are interested in testing $H_a: \text{MED}\bracks{Y} \neq 1$yr. We run a bootstrap test. Below is the \texttt{R} code which makes use of the \texttt{survival} package. The objects \texttt{ys} and \texttt{c\_vec} are the vectors of $y_i$'s and $c_i$'s respectively.
+
+\footnotesize
+\begin{verbatim}
+B = 1e5
+median_bs = array(NA, B)
+idx = 1 : n
+for (b in 1 : B){
+  idx_b = sample(idx, n, replace = TRUE)
+  ys_b = ys[idx_b]
+  c_vec_b = c_vec[idx_b]
+  survival_fit_obj_b = survfit2(Surv(ys_b, 1 - c_vec_b) ~ 1) 
+  median_bs[b] = summary(survival_fit_obj_b)$table[7]  
+}
+\end{verbatim}
+\normalsize
+
+
+\subquestionwithpoints{5} How many bootstrap samples does this bootstrap test use?\spc{1} 
+
+
+Below are bootstrap samples' frequencies of the median.  
+
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=6.0in]{bootstraps}
+\end{figure}
+
+\subquestionwithpoints{7}  Consider the test $H_a: \text{MED}\bracks{Y} \neq 1$yr at level $\alpha = 5\%$. State the test decision.
+~\spc{1}
+
+ \line(1,0){410} \\
+We now consider the following parametric model for survival of our customers, 
+
+\beqn
+Y_1, \ldots, Y_n \iid \text{ExtNegBinom}(\theta_1, \theta_2) := p(y) &=& \frac{\Gammaf{y + \theta_1 - 1}}{y! \Gammaf{\theta_1}} (1 - \theta_2)^y \theta_2^{\theta_1}, \\
+F(y) &=& I_{\theta_2}(\theta_1, y + 1), ~~\expe{Y} = \frac{\theta_1 (1 - \theta_2)}{\theta_2}
+\eeqn
+
+\noindent where $I_a(b, c)$ is the regularized incomplete beta function. The parameter space is\\ $\theta_1 \in (0, \infty)$, $\theta_2 \in (0,1)$ and the support is $\support{Y} = \braces{0,1,2,\ldots}$.
+
+\subquestionwithpoints{9}  Find the likelihood function. Your answer must only be a function of the data, parameter(s), the factorial function, the gamma function and the regularized incomplete beta function and fundamental constants.
+
+\beqn
+\hspace{-1.5cm}\mathcal{L}(\theta_1, \theta_2; y_1, \ldots, y_n, c_1, \ldots, c_n) = \hspace{5in}
+\eeqn 
+~\spc{6}
+
+
+\subquestionwithpoints{5}  Using the likelihood function above, we take its log and use an optimizer to maximize it over $\theta_1, \theta_2$. We find $\thetahathatmle_1 = 4.128$ and $\thetahathatmle_2 = 0.271$. Find the maximum likelihood estimate of $\theta$, the mean subscription period measured in months to three significant digits.
+
+\beqn
+\hspace{-1.5cm}\thetahathatmle = \hspace{5in}
+\eeqn \spc{0.5}
+
+\end{enumerate}
+
+\problem We are trying to understand IQ in the army. We look at a sample of $n=100$ IQ scores which are normalized between the minimum score (coded as 0) and the maximum score (coded as 1). No one in the sample actually has the minimum nor the maximum score. Thus we assume the scores to be $\Xoneton$ as iid where $\support{X} = (0,1)$. Here is a histogram of the data.
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=5.5in]{hist}
+\end{figure}
+
+\noindent We believe the data has two modes so we fit the following model:
+
+\beqn
+\Xoneton \iid \theta \,\betanot{\alpha_1}{\beta_1} + (1-\theta) \,\betanot{\alpha_2}{\beta_2}
+\eeqn 
+
+\noindent and thus the likelihood and log likelihood are
+
+\beqn
+\mathcal{L} &=& \prod_{i=1}^n \parens{
+\theta \oneover{B(\alpha_1, \beta_1)}  x_i^{\alpha_1 - 1} (1-x_i)^{\beta_1 - 1} +
+(1 - \theta) \oneover{B(\alpha_2, \beta_2)} x_i^{\alpha_2 - 1} (1-x_i)^{\beta_2 - 1}
+} \\
+\ell &=& \sum_{i=1}^n \natlog{
+\theta \oneover{B(\alpha_1, \beta_1)}  x_i^{\alpha_1 - 1} (1-x_i)^{\beta_1 - 1} +
+(1 - \theta) \oneover{B(\alpha_2, \beta_2)} x_i^{\alpha_2 - 1} (1-x_i)^{\beta_2 - 1}
+}
+\eeqn
+
+\begin{enumerate}
+\subquestionwithpoints{5} What are the parameter(s) in this model?\spc{1}
+\subquestionwithpoints{5} What type of model is this called? (The answer is one or two words).\spc{1}
+
+\subquestionwithpoints{7} If you were to use data augmentation, how would you define $I_i$?
+
+\beqn
+\hspace{-1.5cm}I_i = \hspace{5in}
+\eeqn 
+~\spc{3}
+
+\subquestionwithpoints{5} After data augmentation and assuming flat priors on all parameters, you use MCMC to estimate the parameters. The $\alpha_1$ sampling step would be a ...  \\~\\ circle one of the two choices: Gibbs step / Metropolis-Hastings step.\spc{0}
+
+
+We now implement an MCMC for inference using the incredible \texttt{stan} software. Below is the first 500 samples in the $\beta_1$ chain:
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=6in]{beta_1}
+\end{figure}
+
+\subquestionwithpoints{5} Would this chain need to be burned in? Yes / no \spc{4}
+
+Here is the autocorrelation plot for the $\beta_1$ chain.
+
+\vspace{-0.5cm}
+\begin{figure}[htp]
+\centering
+\includegraphics[width=6in]{beta_1_acf}
+\end{figure}
+\vspace{-0.5cm}
+
+\subquestionwithpoints{5} At what number of samples should this chain be thinned? If the chain does not need to be thinned, write \qu{1} below. \spc{1}
+
+\subquestionwithpoints{5} After burning and thinning, are the samples considered iid? Yes / no. \spc{0}
+
+Here is the histogram of the $\beta_1$ chain after burning and thinning:
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=6in]{beta_1_posterior}
+\end{figure}
+
+\subquestionwithpoints{5} Estimate the MMSE for $\beta_1$. \spc{3}
+
+
+Here is the histogram of the $\theta$ chain after burning and thinning:
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=5.5in]{theta_posterior}
+\end{figure}
+
+
+\subquestionwithpoints{7} Estimate $CR_{\theta, 95\%}$.\spc{2}
+
+We are now interested in the difference of the two modes we observe in the data. Recall the mode of a beta distribution is given by $(\alpha-1)/(\alpha+\beta+2)$ if $\alpha, \beta >1$. We are very confident that both $\alpha_1, \beta_1, \alpha_2, \beta_2 >1$. We create a new parameter,
+
+\beqn
+\tau := \frac{\alpha_1-1}{\alpha_1+\beta_1+2} - \frac{\alpha_2-1}{\alpha_2+\beta_2+2}.
+\eeqn
+
+Using the MCMC samples, we compute the $\tau$'s and show a histogram of this new \emph{derived} chain after burning and thinning. The vertical line indicates the $\doublehat{\tau}^{MMSE}$:
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=5.5in]{tau_posterior}
+\end{figure}
+
+\subquestionwithpoints{7} Consider the test \qu{$H_a:$ the two modes are unequal} at level $\alpha = 5\%$. State the test decision.\spc{1}
+
+
+\end{enumerate}
+
+\end{document}

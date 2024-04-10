@@ -1,0 +1,206 @@
+\documentclass[12pt]{article}
+
+\include{preamble}
+
+\newcommand{\instr}{\small Your answer will consist of a lowercase string (e.g. \texttt{aebgd}) where the order of the letters does not matter. \normalsize}
+
+\title{Math 343 / 643 Fall \the\year{} \\ Midterm Examination Two}
+\author{Professor Adam Kapelner}
+
+\date{April 9, \the\year{}}
+
+\begin{document}
+\maketitle
+
+\noindent Full Name \line(1,0){410}
+
+\thispagestyle{empty}
+
+\section*{Code of Academic Integrity}
+
+\footnotesize
+Since the college is an academic community, its fundamental purpose is the pursuit of knowledge. Essential to the success of this educational mission is a commitment to the principles of academic integrity. Every member of the college community is responsible for upholding the highest standards of honesty at all times. Students, as members of the community, are also responsible for adhering to the principles and spirit of the following Code of Academic Integrity.
+
+Activities that have the effect or intention of interfering with education, pursuit of knowledge, or fair evaluation of a student's performance are prohibited. Examples of such activities include but are not limited to the following definitions:
+
+\paragraph{Cheating} Using or attempting to use unauthorized assistance, material, or study aids in examinations or other academic work or preventing, or attempting to prevent, another from using authorized assistance, material, or study aids. Example: using an unauthorized cheat sheet in a quiz or exam, altering a graded exam and resubmitting it for a better grade, etc.\\
+\\
+\noindent I acknowledge and agree to uphold this Code of Academic Integrity. \\~\\
+
+\begin{center}
+\line(1,0){350} ~~~ \line(1,0){100}\\
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~signature~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ date
+\end{center}
+
+\normalsize
+
+\section*{Instructions}
+This exam is 75 minutes and closed-book. You are allowed \textbf{one} page (front and back) of a \qu{cheat sheet}, blank scrap paper (provided by the proctor) and a graphing calculator (which is not your smartphone). Please read the questions carefully. Within each problem, I recommend considering the questions that are easy first and then circling back to evaluate the harder ones. No food is allowed, only drinks. %If the question reads \qu{compute,} this means the solution will be a number otherwise you can leave the answer in \textit{any} widely accepted mathematical notation which could be resolved to an exact or approximate number with the use of a computer. I advise you to skip problems marked \qu{[Extra Credit]} until you have finished the other questions on the exam, then loop back and plug in all the holes. I also advise you to use pencil. The exam is 100 points total plus extra credit. Partial credit will be granted for incomplete answers on most of the questions. \fbox{Box} in your final answers. Good luck!
+
+\pagebreak
+
+\problem Consider the following matrix of constant measurements:
+
+\beqn
+\X := \bracks{\onevec_n~|~\x_{\cdot 1}~|~\ldots~|~ \x_{\cdot p}}
+\eeqn
+
+\noindent with column indices $0, 1, \ldots, p$ and row indices $1, 2, \ldots, n$. We assume also a continuous (real-valued) response model which is linear in these measurements, i.e.
+
+\beqn
+\Y = \X\bbeta + \berrorrv.
+\eeqn
+
+\noindent For the error term, we assume the \qu{core assumption},
+
+\beqn
+\berrorrv \sim \multnormnot{n}{\zerovec_n}{\sigsq \I_n}.
+\eeqn
+
+\noindent And for our estimator of $\bbeta$, we choose
+
+\beqn
+\B := \XtXinvXt \Y.
+\eeqn
+
+\begin{enumerate}[(a)]
+
+\subquestionwithpoints{5} In the \qu{linear response model assumption line} above, list the scalar parameters (if the parameter is a vector, list the scalar entries). If there are no parameters, write \qu{none}. \spc{1}
+
+\subquestionwithpoints{5} In the \qu{core assumption} line above, list the scalar parameters (if the parameter is a vector, list the scalar entries). If there are no parameters, write \qu{none}. \spc{1}
+
+\subquestionwithpoints{5} In the \qu{our estimator} line above, list the scalar parameters (if the parameter is a vector, list the scalar entries). If there are no parameters, write \qu{none}. \spc{1.5}
+
+\subquestionwithpoints{10} Show that $\B$ is unbiased. \spc{6}
+
+
+
+\noindent Now choose the following estimator instead
+
+\beqn
+\B_{\text{ridge}} := \inverse{\XtX + \lambda \I_{p+1}} \Xt \Y ~~\text{where}~\lambda > 0.
+\eeqn
+
+
+\subquestionwithpoints{6} Which of these two will be larger: $\normsq{\B}$ or $\normsq{\B_{\text{ridge}}}$? \spc{0.5}
+
+
+\end{enumerate}
+
+
+\problem This problem will analyze data from a study that investigated tooth cell growth (in length) in guinea pigs by vitamin C dose (0.5, 1 or 2mg/d) and delivery method (OJ = orange juice or VC = vitamin capsule). Here is the results of an OLS model fit to both dose and delivery method:
+
+\begin{Verbatim}[frame=single]
+                Estimate Std. Error t value Pr(>|t|)    
+(Intercept)       9.2725     1.2824   7.231 1.31e-09 ***
+deliveryVC       -3.7000     1.0936  -3.383   0.0013 ** 
+dose              9.7636     0.8768  11.135 6.31e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 4.236 on 57 degrees of freedom
+Multiple R-squared:  0.7038,	Adjusted R-squared:  0.6934 
+F-statistic: 67.72 on 2 and 57 DF,  p-value: 8.716e-16
+\end{Verbatim}
+
+\noindent Unless otherwise noted, assume that $\berrorrv \sim \multnormnot{n}{\zerovec_n}{\sigsq \I_n}$. 
+Let $\X$ denote the design matrix for this linear regression. The following quantities may be useful:
+
+\beqn
+\XtX = \bracks{\begin{array}{ccc} 60 & 30 & 70 \\ 30 & 30 & 30 \\ 70 & 35 & 105 \end{array}}, ~~~
+\XtXinv = \bracks{\begin{array}{ccc} ~~0.09 & -0.03 &-0.05 \\ -0.03 &  ~~0.07 & ~~0.00 \\ -0.05 &  ~~0.00 & ~~0.04 \end{array}}, 
+\eeqn
+
+\begin{enumerate}[(a)]
+
+\subquestionwithpoints{5} What is the sample size $n$ of this dataset?\spc{-0.5}
+
+\subquestionwithpoints{5} Test $H_0: \beta_{\text{dose}} = 0$ at $\alpha = 5\%$. \spc{2}
+
+\subquestionwithpoints{5} Create a 95\% CI for the effect of delivery being a vitamin capsule instead of orange juice. The t-value to use in this computation is 2.00. \spc{2}
+
+\subquestionwithpoints{5} Run the omnibus test at $\alpha = 5\%$. \spc{1}
+
+\subquestionwithpoints{10} For a guinea pig who was given orange juice and 1mg of vitamin C, provide a 95\% CI for the guinea pig's tooth cell growth. The t-value to use in this computation is 2.00. \spc{8}
+
+
+\subquestionwithpoints{10} Assuming independence of errors and homoskedasticity of errors, test $H_0: \beta_{\text{dose}} = 10$ at $\alpha = 5\%$. \spc{4}
+
+
+\subquestionwithpoints{5} Is there enough information here to test $H_0: \beta_{\text{dose}} = 0$ at $\alpha = 5\%$ if we assume independent, mean-centered and heteroskedastic errors? Yes / No \spc{-0.5}
+
+In reality, we are unsure of the distribution of the errors but we know that due to the way the data was sampled, we are guaranteed that the errors are independent. Hence use a bootstrap. We are interested in inference for the effect of delibery being a vitamin capsule instead of orange juice. The top of the following page shows the result of 1,000 boostrap samples where each time, the OLS for this effect was computed. The vertical lines indicate the empirical 2.5\%ile and 97.5\%ile.
+
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=6.5in]{bootstrap}
+\end{figure}
+\FloatBarrier
+
+
+\subquestionwithpoints{5} Using the boostrap samples, test $H_0: \beta$ for vitamin capsule delivery is zero at $\alpha = 5\%$. \spc{2}
+
+
+\end{enumerate}
+
+\problem This problem will analyze data from a study that investigated the number of yarn breaks by two features: type of yarn wool (A or B) and amount of tension (L = low, M = medium, H = high). Since the response being modeled is a count, we choose a negative binomial model which is more flexible than a Poission model. We parameterize the negative binomial with parameters $r, \theta$ where its expectation is $\theta$. We link $\theta$ to the two features using the link $\theta_i = e^{\x_i \bbeta}$ for $i = 1, \ldots, n$. Below is the summary for the inference of $\bbeta$ for both features (the inference for $r$ is omitted). We also display the log-likelihood of this model.
+
+\begin{Verbatim}[frame=single]
+            Estimate Std. Error z value Pr(>|z|)    
+(Intercept)   3.6734     0.0979  37.520  < 2e-16 ***
+woolB        -0.1862     0.1010  -1.844   0.0651 .  
+tensionM     -0.2992     0.1217  -2.458   0.0140 *  
+tensionH     -0.5114     0.1237  -4.133 3.58e-05 ***
+
+'log Lik.' -199.3819 (df=5)
+\end{Verbatim}
+
+\noindent Here are outputs for two other models:
+
+\begin{Verbatim}[frame=single]
+            Estimate Std. Error z value Pr(>|z|)    
+(Intercept)  3.43518    0.08071  42.562   <2e-16 ***
+woolB       -0.20599    0.11533  -1.786   0.0741 .  
+
+'log Lik.' -206.9874 (df=3)
+\end{Verbatim}
+
+\begin{Verbatim}[frame=single]
+            Estimate Std. Error z value Pr(>|z|)    
+(Intercept)  3.59426    0.08715  41.243  < 2e-16 ***
+tensionM    -0.32132    0.12557  -2.559   0.0105 *  
+tensionH    -0.51849    0.12739  -4.070  4.7e-05 *** 
+
+'log Lik.' -201.0109 (df=4)
+\end{Verbatim}
+
+\noindent Here are some values of the inverse CDF of the $\chisq{df}$ distribution:
+
+\begin{Verbatim}[frame=single,fontsize=\footnotesize]
+                Probability less than the critical value
+  df          0.90      0.95     0.975      0.99     0.999
+----------------------------------------------------------
+  1          2.706     3.841     5.024     6.635    10.828
+  2          4.605     5.991     7.378     9.210    13.816
+  3          6.251     7.815     9.348    11.345    16.266
+  4          7.779     9.488    11.143    13.277    18.467
+  5          9.236    11.070    12.833    15.086    20.515
+  6         10.645    12.592    14.449    16.812    22.458
+  7         12.017    14.067    16.013    18.475    24.322
+\end{Verbatim}
+
+\begin{enumerate}[(a)]
+
+\subquestionwithpoints{4} Is the parameter $r$ a nuisance parameter? Yes / No \spc{-0.5}
+
+\subquestionwithpoints{6} Calculate the likelihood ratio test statistic for the test that tension has no effect on number of yarn breaks. \spc{1.5}
+
+\subquestionwithpoints{3} Test the null hypothesis that tension has no effect on number of yarn breaks at $\alpha=5\%$. Justify your answer. \spc{2}
+
+\subquestionwithpoints{6} The maximum likelihood estimate of $r$ is 9.94. Given a piece of yarn with wool type B and low tension, predict the number of yarn breaks it will have to the nearest number of yarn breaks. \spc{2}
+
+
+\end{enumerate}
+\end{document}
+
