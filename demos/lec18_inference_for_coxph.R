@@ -6,6 +6,7 @@
 pacman::p_load(survival, skimr, ggplot2)
 
 #load the lung data set (same dataset we used for Kaplan-Meier and Weibull demos)
+?survival::lung
 lung = na.omit(survival::lung)
 lung$status = lung$status - 1 #needs to be 0=alive, 1=dead (see Note in documentation!)
 skim(lung)
@@ -17,6 +18,7 @@ surv_obj
 
 full_mod = coxph(surv_obj ~ . - time - status, lung)
 summary(full_mod)
+exp(coef(full_mod))
 #interpretation? Remember the unit of e^b_j > 0 is a multiplier on hazards of 
 #dying at any time t. These coefficients are not related to expected survival
 #like in Weibull regression. So hazards > 1 means more likely to die at any time t
@@ -24,6 +26,13 @@ summary(full_mod)
 #in ph.ecog of one unit => a multiplier of 2.478 which is a 2.5 chance of dying
 #at any time when compared to a subject without that increase of ph.ecog
 #which makes sense (see what ph.ecog measures in documentation)
+
+
+#fit weibull for contrast
+full_mod_weibull = survreg(surv_obj ~ . - time - status, lung)
+summary(full_mod_weibull)
+exp(coef(full_mod_weibull))
+#interpretation?
 
 #now let's do omnibus test
 null_mod = coxph(surv_obj ~ 1, lung)
