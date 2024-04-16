@@ -1,69 +1,78 @@
 \begin{enumerate}
-\item[Day 1] [35min] the two-proportion z-test as a Wald test, the pooled proportion estimator;  [10min] the approximate two-sample t-test as an approximate two-sample z-test (Wald test); 
-[15min] CI for the difference of two proportions
+\item[D1, Lec 1] [15min] review of Gibbs sampling;  [20min] background on Markov chains and invariant distributions; [20min] sketch of proof of why Gibbs sampling converges; [25min] burning and thinning with discussion of autocorrelation
 
-\item[Day 2] [35min] Grid sampling, distribution sampling via kernel grid sampling, disadvantages of grid sampling; [40min] systematic sweep Gibbs sampling, burning the chain, sampling from the semi-conjugate NIG mode
+\item[D2, Lec 2] [25min] Poisson count model with hurdle; [25min] the \texttt{stan / rstan} package for model-fitting and inference; [25min] Poisson change point model
 
-\item[Day 3] [20min] Autocorrelation grid sampling, thinning the chain; [30min] approximate inference with Gibbs samples; [25min] change point detection model  
+\item[D3, Lec 3] [50min] Metropolis-Hastings Algorithm with application to Poisson Regression in \texttt{stan}; [25min] Permutation testing for different DGP's among two populations
 
-\item[Day 4] [55min] normal mixture model with data augmentation; [20min] Bayes Factors part I
+\item[D4, Lec 4] [25min] Choice of test statistics for permutation testing for different DGP's among two populations; [50min] Bootstrap for confidence interval construction and testing with examples
 
-\item[Day 5] [15min] Bayes Factors part II; [60min] Metropolis algorithm, Metropolis-Hastings algorithm, metropolis-within-Gibbs, transition kernels
+\item[D5, Lec 5] [50min] Estimation for mixture model with Expectation-Maximization algorithm (EM); [25min] Gibbs sampler for mixture model inference
 
-\item[Day 6] [10min] equivalence of the two-sided z and $\chi^2$ tests, equivalence of the two-sided t and F tests; shape of the $\chi^2$ and F distributions;  [30min] $\chi^2$ goodness of fit test for multinomial parameters, its $H_0$ and $H_a$, observed and expected counts, the test statistic; [35min] the $\chi^2$ test of independence among two categorical variables, its $H_0$ and $H_a$, observed and expected counts, the test statistic
+\item[D6, Lec 6] [10min] introduction to survival analysis / churn modeling; [20min] review of the Weibull rv; [10min] invariance of MLE thm; [15min] right censoring at a fixed time point; [20min] Weibull likelihood with right-censoring
 
-\item[Day 7] [10min] review of Type I/II errors; [40min] the multiple hypothesis testing / comparison problem, the $2 \times 2$ frequency table of test results, false discoveries; [10min] definition of familywise error rate (FWER), weak FWER control; [10min] Bonferroni procedure 
+%put invariance of MLE into 341!!!
+%change definition of c_i vector
 
-\item[Day 8] [15min] Sidak procedure; [25min] Simes procedure; [15min] definition of false discovery proportion, false discovery rate (FDR), setting for equivalence of FWER and FDR, statement that the Simes procedure provides strong control of the FDR; [20min] proof that p-values are uniformly distributed under $H_0$
+\item[D7, Lec 7] [15min] empirical survival function as the sum of indicators; [15min] empirical survival function as the product limit estimator; [15min] inference for survival; [15min] product limit estimator with duplicate survivals; [15min] empirical survival function with right censoring at a fixed time point
 
-\item[Day 9] \inblue{Midterm I Review}
-\item[Day 10] \inred{Midterm I}
+\item[D8, Lec 8] [15min] Right censoring at arbitrary times; [30min] Kaplan-Meier survival function estimator; [10min] inference for one-sample Kaplan-Meier survival estimator; [20min]  inference for two-sample Kaplan-Meier survival estimator with log-rank test
 
-%85min
-\item[Day 11] [50min] derivation of the score test as a Wald test, the score test statistic for the logistic distribution with known scale parameter; [15min] definition of likelihood ratio (LR) test statistic, statement of its asymptotic convergence to a $\chi^2_1$, LR test (LRT) derivation of the LR statistic for the iid Bernoulli DGP; [10min] Proof of the asymptotic convergence of the LR test statistic part I
+\item[D9] \inblue{Midterm I Review}
+\item[D10] \inred{Midterm I}
 
-%65min
-\item[Day 12] [15min] Proof of the asymptotic convergence of the LR test statistic part II;  [50min] generalized likelihood ratio test for reduced models nested in a full model, statement of asymptotic convergence to a $\chi^2$ with degrees of freedom equal to the difference of number of parameters, demonstration that it differs from the goodness of fit test, demonstration in the normal iid DGP; [10min] visualizing the Wald, score and LR tests
+\item[D11, Lec 9] [10min] review of linear model candidate set and optimal element; [20min] motivation of linear model error multivariate normal core assumption; [10min] proof of normality of OLS estimators; [25min] Cochran's theorem applied to error terms; [10min] computing the correct denominator in the unbiased estimator of $\sigma^2$
 
-%85min
-\item[Day 13] [5min] testing entire DGPs; [10min] definition and illustration of the empirical CDF; [20min] one-sample Kolmogorov-Smirnov (KS) test, statement of Kolmogorov distribution and its critical values; [10min] tests of DGP equivalence among two populations; [15min] two-sample KS test; [15min] intro to the the two-sample permutation test
+\item[D12, Lec 10] [10min] Proof of the normality of OLS predictions and OLS residuals; [15min] proof that residuals and slope estimators are independent; [30min] proof that the test statistic for the OLS estimators are Student's t-distributed; [20min] proof that the test statistic for the expectation of a response is Student's t-distributed
+
+\item[D13, Lec 11] [15min] definition and motivation of adjusted $R^2$; [20min] proof that the test statistic for the the response is Student's t-distributed, prediction intervals; [40min] proving the omnibus $F$ test
+
+\item[D14, Lec 12] [10min] proving that $R^2$ is beta-distribution under the null of no linear signal in the covariates; [65min] proving the partial $F$ test for arbitrarily nested (full / reduced) models
+
+\item[D15, Lec 13] [15min] proof that the OLS estimator is the maximum likelihood estimator (MLE); [60min] proof that the ridge estimator is the maximum a posteriori estimator under iid normal prior on the slope parameters, ridge regression demos, proof that ridge regression is biased
+
+\item[D16, Lec 14] [75min] proof that the lasso estimator is the maximum a posteriori estimator under iid laplace prior on the slope parameters, lasso vs ridge demos, lasso as a \qu{variable selection} preprocessing algorithm
+
+\item[D17, Lec 15] [10min] introduction to robust linear regression inference without the core error assumption; [10min] employing the bootstrap for linear regression inference; [25min] linear regression inference for mean centered homoskedastic errors with asymptotically normal-distributed estimators and Wald testing; [30min] linear regression inference for mean centered heteroskedastic errors with asymptotically normal-distributed Huber-White estimators and Wald testing
+
+\item[D18, Lec 16] [15min] inference for single effects in probability regression models, a type of generalized linear model (GLM) using MLE's and Wald tests; [10min] likelihood ratio test (LRT) with arbitrarily nested (full / reduced) models; [10min] LRT for probability regression models; [15min] Poisson regression, the log-linear mean link function, and inference for single effects with Wald testing and inference for multiple effects with the LRT; [15min] Negative binomial regression, reparameterization to obtain the log-linear mean link function, and inference for single effects with Wald testing and inference for multiple effects with the LRT, discussion of nuisance parameter; [10min] review of Weibull regression with censoring, the log-linear mean link function, inference for single effects with Wald testing and inference for multiple effects with the LRT
+
+\item[D19, Lec 17] [45min] definition of hazart rates / hazard functions, expressing the PDF with the hazard rate and an integral representation of the survival function; [30min] the Cox proportional hazards model (cox PH), the likelihood of the survival DGP in cox PH modeling
+
+\item[D20] \inblue{Midterm II Review}
+\item[D21] \inred{Midterm II}
+
+\item[D22, Lec 18] [35min] expression that allows inference for the cox PH model, demos of cox PH modeling vs Weibull modeling; [15min] spurious correlations; [15min] causal diagrams as directed acyclic graphs (DAG's); [10min] definition of causality as manipulations within the DAG
 
 
 
-%65min
-\item[Day 14] [45min] the two-sample permutation test partitioning the master population, dsicussion of possible test statistics, computational construction of its RET via resampling; [30min] the nonparametric bootstrap procedure, typical use cases, approximate CI construction, approximate hypothesis testing
+%[20min] causal inference vs statistical inference, counfounding variable, an illustration of one scenario with confounding and one scenario without confounding; [15min] definition of a two-arm treatment vs control experiment, definition of assignment / allocation / manipulation; [10min] the Rubin causal model, counterfactuals, additive treatment effect, selection bias inducing bias in the naive treatment estimator; [30min] response model linear in confounder and noise, noise as an approximate normal realization, the explicit bias term and its explanation;
 
-\item[Day 15] [30min] Identifiability [30min] statistical sufficiency; [15min] statistical ancillarity
+%[30min] randomized experiments, bernoulli trial design, completely randomized trial design, statment that causal estimates are unbiased over errors and randomized assignments, statement that bias is small in any random assignment; [45min] the randomization test vs. the permutation test, hypothesis testing and confidence intervals
 
-\item[Day 16] [34min] exponential families: sufficiency and ancillarity terms; [20min] Normal posterior under laplace prior = Lasso; [20min] Normal posterior under normal prior = Ridge
+\item[D23, Lec 19] 
 
-%80min
-\item[Day 17] [20min] causal inference vs statistical inference, counfounding variable, an illustration of one scenario with confounding and one scenario without confounding; [15min] definition of a two-arm treatment vs control experiment, definition of assignment / allocation / manipulation; [10min] the Rubin causal model, counterfactuals, additive treatment effect, selection bias inducing bias in the naive treatment estimator; [30min] response model linear in confounder and noise, noise as an approximate normal realization, the explicit bias term and its explanation;
+\item[D24, Lec 20] 
 
 %70min
-\item[Day 18] [30min] randomized experiments, bernoulli trial design, completely randomized trial design, statment that causal estimates are unbiased over errors and randomized assignments, statement that bias is small in any random assignment; [45min] the randomization test vs. the permutation test, hypothesis testing and confidence intervals
+\item[D25, Lec 21] 
 
-\item[Day 19] \inblue{Midterm II Review}
-\item[Day 20] \inred{Midterm II}
+%[55min] Derivation of T-test and F-test and chi-squared test linear regression estimator; 
 
-\item[Day 21] [30min] optimal experimental design; [30min] restricted randomization strategies such as rerandomization, matching; [15min] sequential experimental design
 
-\item[Day 22] [35min] Weibull modeling of survival; [35min] Kaplan-Meier estimate
-
-\item[Day 23] [30min] Proportional Cox model; [30min] Poisson Regression]; [15min] Zero-Inflated Poisson regression
-
-\item[Day 24] [30min] Negative Binomial regression; [20min] Beta regression; [15min] Review of multivariate normal rv
-
-%70min
-\item[Day 25] [55min] Derivation of T-test and F-test and chi-squared test linear regression estimator; [20min] derivation of variance-covariance matrix of the least squared estimators
+%[20min] derivation of variance-covariance matrix of the least squared estimators
 
 %75min
-\item[Day 26] [30min] Introduction to neural networks; [45min] estimation of parameters in neural networks using optimization algorithms
+\item[D26, Lec 22] 
+
+%[30min] Introduction to neural networks; [45min] estimation of parameters in neural networks using optimization algorithms
 
 %80min
-\item[Day 27] [30min] Introduction to deepl learning; [45min] convolutional neural networks for image modeling
+\item[D27, Lec 23] 
 
-\item[Day 28] \inblue{Final Review}
+%[30min] Introduction to deepl learning; [45min] convolutional neural networks for image modeling
+
+\item[D28] \inblue{Final Review}
 
 \end{enumerate}
 
