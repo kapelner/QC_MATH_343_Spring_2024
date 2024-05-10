@@ -7,8 +7,8 @@ This is the course homepage for Math 343 / 643 at Queens College, City Universit
 
 My lecture notes are scanned in as PDF files contributed by myself.
 
-<!--
-* Lecture 23 [(notes)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/lectures/lec23.pdf)-->
+<!---->
+* Lecture 23 [(notes)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/lectures/lec23.pdf)
 * Lecture 22 [(notes)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/lectures/lec22.pdf)
 * Lecture 21 [(notes)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/lectures/lec21.pdf)
 * Lecture 20 [(notes)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/lectures/lec20.pdf)
@@ -35,17 +35,17 @@ My lecture notes are scanned in as PDF files contributed by myself.
 
 ## Homeworks
 
-<!--
-* Homework 3 [(download)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/homeworks/hw03/hw03t.pdf?raw=true) [(view)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/homeworks/hw03/hw03t.pdf) (due 10/8)-->
+<!---->
+* Homework 3 [(download)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/homeworks/hw03/hw03t.pdf?raw=true) [(view)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/homeworks/hw03/hw03t.pdf) (due 5/19)
 * Homework 2 [(download)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/homeworks/hw02/hw02t.pdf?raw=true) [(view)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/homeworks/hw02/hw02t.pdf) (due 4/10)
 * Homework 1 [(download)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/homeworks/hw01/hw01t.pdf?raw=true) [(view)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/homeworks/hw01/hw01t.pdf) (due 3/3)
 
 ## Labs
 
-<!--
-* [Lab 3, due 3/13](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/labs/lab03.Rmd) -->
-* [Lab 2, due 4/11](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/labs/lab02.Rmd) 
-* [Lab 1, due 3/3](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/labs/lab01.Rmd)
+<!-- 
+* [Lab 3](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/labs/lab03.Rmd) (not formally due) -->
+* [Lab 2](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/labs/lab02.Rmd) (due 4/11)
+* [Lab 1](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/labs/lab01.Rmd) (due 3/3)
 
 ## Exams
 
