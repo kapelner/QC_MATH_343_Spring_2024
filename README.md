@@ -50,8 +50,8 @@ My lecture notes are scanned in as PDF files contributed by myself.
 ## Exams
 
 * Midterm I, Thursday, February 29 in class [(exam)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/exams/midterm1/midterm1.pdf) [(solutions)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/exams/midterm1/midterm1_solutions.pdf)
-* Midterm II, Tuesday, April 9 in class  [(exam)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/exams/midterm2/midterm2.pdf) [(solutions)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/exams/midterm2/midterm2_solutions.pdf)
-* Final, Thursday, May 16 6-8PM in KY258
+* Midterm II, Tuesday, April 9 in class [(exam)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/exams/midterm2/midterm2.pdf) [(solutions)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/exams/midterm2/midterm2_solutions.pdf)
+* Final, Thursday, May 16 4-6PM in KY258 [(exam)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/exams/final/final.pdf) [(solutions)](https://github.com/kapelner/QC_MATH_343_Spring_2024/blob/master/exams/final/final_solutions.pdf)
 
 ## Office Hours
 

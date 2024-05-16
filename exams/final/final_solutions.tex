@@ -1,0 +1,620 @@
+\documentclass[12pt]{article}
+
+\include{preamble}
+
+\newcommand{\instr}{\small Your answer will consist of a lowercase string (e.g. \texttt{aebgd}) where the order of the letters does not matter. \normalsize}
+
+\title{Math 343 / 643 Fall \the\year{} \\ Final Examination \inred{Solutions}}
+\author{Professor Adam Kapelner}
+
+\date{May 16, \the\year{}}
+
+\begin{document}
+\maketitle
+
+\noindent Full Name \line(1,0){410}
+
+\thispagestyle{empty}
+
+\section*{Code of Academic Integrity}
+
+\footnotesize
+Since the college is an academic community, its fundamental purpose is the pursuit of knowledge. Essential to the success of this educational mission is a commitment to the principles of academic integrity. Every member of the college community is responsible for upholding the highest standards of honesty at all times. Students, as members of the community, are also responsible for adhering to the principles and spirit of the following Code of Academic Integrity.
+
+Activities that have the effect or intention of interfering with education, pursuit of knowledge, or fair evaluation of a student's performance are prohibited. Examples of such activities include but are not limited to the following definitions:
+
+\paragraph{Cheating} Using or attempting to use unauthorized assistance, material, or study aids in examinations or other academic work or preventing, or attempting to prevent, another from using authorized assistance, material, or study aids. Example: using an unauthorized cheat sheet in a quiz or exam, altering a graded exam and resubmitting it for a better grade, etc.\\
+\\
+\noindent I acknowledge and agree to uphold this Code of Academic Integrity. \\~\\
+
+\begin{center}
+\line(1,0){350} ~~~ \line(1,0){100}\\
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~signature~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ date
+\end{center}
+
+\normalsize
+
+\section*{Instructions}
+This exam is 120 minutes and closed-book. You are allowed \textbf{three} pages (front and back) of a \qu{cheat sheet}, blank scrap paper (provided by the proctor) and a graphing calculator (which is not your smartphone). Please read the questions carefully. Within each problem, I recommend considering the questions that are easy first and then circling back to evaluate the harder ones. No food is allowed, only drinks. %If the question reads \qu{compute,} this means the solution will be a number otherwise you can leave the answer in \textit{any} widely accepted mathematical notation which could be resolved to an exact or approximate number with the use of a computer. I advise you to skip problems marked \qu{[Extra Credit]} until you have finished the other questions on the exam, then loop back and plug in all the holes. I also advise you to use pencil. The exam is 100 points total plus extra credit. Partial credit will be granted for incomplete answers on most of the questions. \fbox{Box} in your final answers. Good luck!
+
+\pagebreak
+
+\problem Consider the independently realized Poisson with mean linear in x,
+
+\beqn
+Y_i \inddist \poisson{\beta_0 + \beta_1 x_i} = \frac{(\beta_0 + \beta_1 x_i)^{y_i} e^{-(\beta_0 + \beta_1 x_i) y_i}}{y_i!}
+\eeqn
+
+\noindent and assume flat priors on $\beta_0$ and $\beta_1$. We do not assume any structural equation model nor DAG for $y$ and $x$. Let the units of $x$ be centimeters and the units of $y$ be kilograms.
+
+\begin{enumerate}[(a)]
+\subquestionwithpoints{3} Demonstrate why a Gibbs sampler \emph{cannot} be implemented to make inference for the parameter $\beta_0$.
+
+\inred{
+\beqn
+f(\beta_0, \beta_1~|~ \x, \y) &\propto& f(\x, \y~|~ \beta_0, \beta_1) f(\beta_0, \beta_1) \propto f(\x, \y~|~ \beta_0, \beta_1) \\
+&=& \prod_{i=1}^n \frac{(\beta_0 + \beta_1 x_i)^{y_i} e^{-(\beta_0 + \beta_1 x_i) y_i}}{y_i!} \propto \prod_{i=1}^n (\beta_0 + \beta_1 x_i)^{y_i} e^{-(\beta_0 + \beta_1 x_i) y_i} \\
+f(\beta_0~|~ \beta_1, \x, \y) &\propto& \prod_{i=1}^n (\beta_0 + \beta_1 x_i)^{y_i} e^{-\beta_0 y_i} ~~\text{}
+\eeqn
+
+The above is not a kernel for any distribution we know of so we cannot use a Gibbs step.
+}
+
+Since we cannot use Gibbs sampling, we employ a Metropolis-Hastings sampler for the kernels of the conditional distributions of $\beta_0$ and $\beta_1$. Let $t \in \naturals$ indicates the iteration number of the sampler. 
+
+\subquestionwithpoints{2} Given the value of the previous iteration, $\beta_{0, t - 1}$, propose a transition distribution by specifying its distribution and parameters. 
+
+\beqn
+\beta_{0, t} \sim \inred{\normnot{\beta_{0, t - 1}}{1}} \hspace{6in}
+\eeqn
+
+Below are the ACF plot for both parameters' samples:
+\vspace{-0.4cm}
+\begin{figure}[htp]
+\centering
+\includegraphics[width=6.0in]{acfs}
+\end{figure}
+\FloatBarrier
+\vspace{-0.7cm}
+
+\subquestionwithpoints{1} At what spacing should we thin the sample chains? \inred{80}
+
+\pagebreak
+
+Below is the histograms of MCM samples for the parameter $\beta_1$ after properly burning and thinning the chain. The vertical line is the average of the chain's values.
+
+\vspace{-0.2cm}
+\begin{figure}[htp]
+\centering
+\includegraphics[width=6.0in]{beta1samples}
+\end{figure}
+\FloatBarrier
+\vspace{-0.7cm}
+
+\subquestionwithpoints{5} Write a detailed sentence that interprets the value of $\doublehat{\beta}_1^{MMSE}$. 
+
+\inred{
+When comparing two observations A and B sampled in the same fashion as the observations in the historical dataset were sampled, when A has $x$ 1cm larger than (B)’s $x$, then (A) is predicted to have an estimated mean count $2.05 \pm 0.25$ larger than (B)’s assuming the mean is linear in the p covariates.
+}\spc{2}
+
+\end{enumerate}
+
+
+\problem There are many ways to measure to invest in the S\&P500. Two popular tickers are SPY and VOO which have market caps of 500M and 1.1T respectively and have equally low expense ratios which are about 0.1\%/yr. But are these two instruments equal? We pull the last ten years of data $n = 2581$ and we are interested in the response $Y$ which is percent daily change. We choose to use the permutation test to test the difference. Let $DGP_1$ and $DGP_2$ denote the DGP's for SPY and VOO respectively. Let $y_1$ be the values for SPY and $y_2$ be the values for VOO. 
+
+\begin{enumerate}[(a)]
+\subquestionwithpoints{2} What is the null hypothesis for this permutation test?
+
+\beqn
+H_0: \inred{DGP_1 = DGP_2} \hspace{6in}
+\eeqn
+
+\subquestionwithpoints{2} During each iteration of the permutation test, how many numeric values are divided into two groups? \\
+
+\inred{$2581 \times 2 = 5162$}
+
+We let $\ybar_{1} - \ybar_{2}$ be the test statistic. The test statistic on the actual data is -0.00017. Over a total of $B = 100,000$ iterations, we have the following histogram of permutation test statistic values:
+\pagebreak
+
+\vspace{-0.2cm}
+\begin{figure}[htp]
+\centering
+\includegraphics[width=6.0in]{perms}
+\end{figure}
+\FloatBarrier
+\vspace{-0.7cm}
+
+\subquestionwithpoints{1} Our choice of $B = 100,000$ is appropriate. Circle one: \inred{\fbox{yes}} / no \spc{-0.5}
+
+\subquestionwithpoints{1} The result of this test is... Circle one: \inred{\fbox{$H_0$ retained}} / $H_0$ rejected \spc{-0.5}
+
+\subquestionwithpoints{3} Estimate a p-value for this test. \\
+
+\inred{$0.999$}
+
+Now that we are reasonably convinced there's no difference between SPY and VOO, we turn to another question. We are interested in large quantiles of the percentage change. Let $\theta := \text{Quantile}[Y, 97.5\%]$. We wish to create a confidence interval for this parameter.
+
+\subquestionwithpoints{1} Which statistical method / procedure provides asymptotically valid inference for $\theta$? The answer should be one or two words only. \\
+
+\inred{bootstrap}
+
+Assuming the correct answer to the previous question, we run this method and produce $B = 100,000$ iterations which we display below. 
+
+\vspace{-0.2cm}
+\begin{figure}[htp]
+\centering
+\includegraphics[width=6.0in]{bootstraps}
+\end{figure}
+\FloatBarrier
+\vspace{-0.7cm}
+
+\subquestionwithpoints{3} Create an approximate 95\% CI for $\theta$.  \\
+
+\inred{$\bracks{1.85, 2.20}$}
+
+\pagebreak
+\end{enumerate}
+
+\problem Consider $\X$ to be the the design matrix of for $n = 30$ observations and $p_{raw} = 5$ numeric covariates and their interactions. Let $\H$ be its orthogonal projection matrix. We assume also a continuous (real-valued) response model which is linear in these measurements,
+
+\vspace{-0.2cm}
+\beqn
+\Y = \X\bbeta + \berrorrv.
+\eeqn
+
+\noindent For the error term, we assume the \qu{core assumption},
+
+\vspace{-0.2cm}
+\beqn
+\berrorrv \sim \multnormnot{n}{\zerovec_n}{\sigsq \I_n}.
+\eeqn
+
+\noindent And the estimator for $\bbeta$ is
+\beqn
+\B := \XtXinvXt \Y 
+\eeqn
+
+\begin{enumerate}[(a)]
+\subquestionwithpoints{4} Find the distribution of $\bv{E}$, the vector of residuals. Show each step.
+
+\inred{
+\beqn
+\bv{E} &=& (\I_n - \H)\Y = (\I_n - \H)(\X\bbeta + \berrorrv) = \X\bbeta - \X\bbeta+ (\I_n - \H)\berrorrv =  \\
+(\I_n - \H)\berrorrv &\sim& \multnormnot{n}{(\I_n - \H)\zerovec_n}{\sigsq (\I_n - \H)\I_n(\I_n - \H)^\top} = \multnormnot{n}{\zerovec_n}{\sigsq (\I_n - \H)}
+\eeqn
+}
+
+We do not assume any structural equation model nor DAG for this phenomenon and observed measurements. We estimate $\b$ below along with selected inference information:
+
+\begin{Verbatim}
+              Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  9.656e+03  8.133e+03   1.187   0.2351    
+x_1         -1.034e+02  1.296e+02  -0.798   0.4251    
+x_2          2.322e+02  1.435e+02   1.619   0.1055    
+x_3          7.178e+03  3.477e+03   2.065   0.0390 *  
+x_4         -2.545e+04  3.573e+03  -7.123 1.07e-12 ***
+x_5          1.983e+04  2.130e+03   9.310  < 2e-16 ***
+x_1:x_2     -8.971e-01  2.306e+00  -0.389   0.6973    
+x_1:x_3      6.117e+00  4.022e+01   0.152   0.8791    
+x_1:x_4      3.227e+02  3.831e+01   8.423  < 2e-16 ***
+x_1:x_5     -4.884e+02  2.005e+01 -24.356  < 2e-16 ***
+x_2:x_3     -2.623e+02  2.771e+01  -9.465  < 2e-16 ***
+x_2:x_4      8.294e+01  3.223e+01   2.573   0.0101 *  
+x_2:x_5      2.294e+02  3.071e+01   7.469 8.19e-14 ***
+x_3:x_4      1.069e+03  2.968e+01  36.023  < 2e-16 ***
+x_3:x_5      4.614e+02  3.787e+01  12.186  < 2e-16 ***
+x_4:x_5     -8.674e+02  3.807e+01 -22.784  < 2e-16 ***
+
+Residual standard error: 1450.0
+Multiple R-squared:  0.87
+\end{Verbatim}
+\pagebreak
+
+Below are values of the 97.5\%iles of the Student's $T$ distribution (q) for many different degrees of freedom (df)
+
+\begin{Verbatim}[fontsize=\footnotesize]
+df      5    6    7    8    9   10  11   12   13   14   15   16   17  18   19   20
+q    2.57 2.45 2.36 2.31 2.26 2.23 2.2 2.18 2.16 2.14 2.13 2.12 2.11 2.1 2.09 2.09
+\end{Verbatim}
+
+\subquestionwithpoints{4} Create a 95\% CI for $\beta$  the linear parameter for the interaction of $x_1 \times x_3$. 
+
+\inred{
+\beqn
+CI_{\beta, 1- \alpha} &=& \bracks{b \pm t_{n - (p+1), 1 - \alpha/2} s_{b}} = \bracks{b \pm t_{14, .975} s_{b}} = \bracks{6.117 \pm t_{14, .975} \cdot 40.22}\\
+&=& \bracks{6.117 \pm 2.14 \cdot 40.22} = \bracks{-79.95, 92.19}
+\eeqn}
+\vspace{-0.5cm}
+
+\subquestionwithpoints{4} [E.C.] Consider a new observation $\x_\star = \bracks{1 ~ 1 ~ 0 ~ 0 ~ 0}$.  Create a 95\% CI for $Y_\star$. Substitute all known quantities and use the notation in the problem header for all unknown quantitites. \spc{3}
+
+\subquestionwithpoints{2} Circle one: \inred{\fbox{$R^2_{adj} < 0.87$}} / $R^2_{adj} = 0.87$ / $R^2_{adj} > 0.87$\spc{-0.5}
+\subquestionwithpoints{3} Compute the value of the $\doublehat{F}$ statistic.
+
+\inred{
+\beqn
+\doublehat{F}^{-1} = \frac{p}{n-(p+1)} \parens{\oneover{R^2} - 1} = \frac{15}{14} \parens{\oneover{0.87} - 1} = 0.16 \mathimplies \doublehat{F} = 6.25
+\eeqn}
+\vspace{-0.5cm}
+
+
+\subquestionwithpoints{2} Assume we now run the omnibus F test based on your computation in the previous question and we reject $H_0$. Also assume we did \emph{not} make a Type I error. What can you now conclude about the vector $\bbeta$? Make a numeric statement below. Hint: the answer is only a few characters. \inred{$\bbeta \neq \zerovec_{16}$}
+
+\subquestionwithpoints{5} The regression above shows $b_1 = -103.4$ and $s_{b_1} = 129.6$.  Write the standard interpretation of $b_1$. Let the units of $x_1$ be centimeters (cm) and the units of $y$ be kilograms (kg). Underline the words in this interpretation that \emph{we know to be impossible given this specific regression}.
+
+\inred{
+When comparing two observations A and B sampled in the same fashion as the observations in the historical dataset were sampled, when A has $x_1$ 1cm larger than (B)’s $x_1$ value \underline{and otherwise shares the same measurement values}, then (A) is predicted to have an estimated response $103.4 \pm 129.6$ kg lower than (B)’s assuming the mean is linear in the p covariates.\\~\\
+(The above is underlined since in a model that has interactions with the variable $x_1$, you cannot keep the value of $x_1 \times x_j$ constant for $j \neq 1$ when changing $x_1$).
+}
+
+\pagebreak
+Consider instead of using the estimator $\B$ above, we use the following estimator:
+
+\beqn
+\B_{lasso} = \argmin_{\w \in \reals^{p+1}}\braces{(\Y - \X\w)^\top (\Y - \X\w) + \lambda \sum_{j=1}^{p+1}|w_j|} ~~\text{where}~~ \lambda>0
+\eeqn
+
+\subquestionwithpoints{5} Using this new estimator, circle all the quantities below that are random:
+
+\beqn
+\Aboxed{\inred{\X\quad\quad
+\Y\quad\quad
+\bv{E}\quad\quad
+\berrorrv\quad\quad
+\B\quad\quad
+\B_{lasso}}}\quad\quad
+\H\quad\quad
+\bbeta\quad\quad
+\sigsq\quad\quad
+\lambda\quad\quad
+n\quad\quad
+p\quad
+\Aboxed{\inred{s_e\quad\quad
+R^2}}\quad\quad
+\eeqn
+
+\subquestionwithpoints{3} Using $\B_{lasso}$, what is the most precise numerical statement you can say about $r$, the count of the number of rejections of $H_0: \beta_j = 0$ where $j \geq 1$ at significance level $\alpha = 5\%$? \\
+
+\inred{$r \leq 11$}
+
+\end{enumerate}
+
+
+
+\problem Consider the lung dataset where missingness is dropped. Survival is measured in years. Below is the code to load the data and properly code it. % and print out the first 100 survival times:
+
+\begin{Verbatim}
+> lung = na.omit(survival::lung)
+> lung$status = lung$status - 1 #needs to be 0=alive, 1=dead
+> surv_obj = Surv(lung$time, lung$status)
+\end{Verbatim}
+
+%> head(surv_obj,100)
+%  [1]  455   210  1022+  310   361   218   166   170   567   613   707    61 
+% [13]  301    81   371   520   574   118   390    12   473    26   107    53 
+% [25]  814   965+   93   731   460   153   433   583    95   303   519   643 
+% [37]  765    53   246   689     5   687   345   444   223    60   163    65 
+% [49]  821+  428   230   840+  305    11   226   426   705   363   176   791 
+% [61]   95   196+  167   806+  284   641   147   740+  163   655    88   245 
+% [73]   30   477   559+  450   156   529+  429   351    15   181   283    13 
+% [85]  212   524   288   363   199   550    54   558   207    92    60   551+
+% [97]  293   353   267   511+
+%\subquestionwithpoints{2} Some of these quantities have a \qu{+} sign appended to them. What does this indicate? \spc{2}
+
+\noindent This dataset came with measurements for each subject. We attempt to model survival using these features using the Weibull model employing log-linear link function we discussed in class. \texttt{Age} is measured in years and \texttt{meal.cal} is measured in cal/d.  Below is the output with inference that employs the MLE core theorem:
+
+\begin{Verbatim}
+survreg(formula = surv_obj ~ age + sex + meal.cal, data = lung)
+
+                Value Std. Error     z      p
+(Intercept)  6.16e+00   6.50e-01  9.48 <2e-16
+age         -1.05e-02   8.24e-03 -1.28  0.202
+sex=Female   3.44e-01   1.49e-01  2.30  0.021
+meal.cal     8.54e-05   1.82e-04  0.47  0.639
+Log(scale)  -3.00e-01   7.29e-02 -4.11  4e-05
+
+Scale= 0.741 
+\end{Verbatim}
+
+
+\begin{enumerate}
+
+\subquestionwithpoints{4} Write an expression that estimates survival (in yr) for a 45yo male who eats 2000cal/d. Do not compute its value. 
+
+\inred{
+\beqn
+\hat{y} =  e^{\x_\star\b} ~\Gamma\parens{1 + \oneover{\doublehat{k}}} = e^{6.16 + 0.00105 (45) + 0.0000854 (2000)} ~\Gamma\parens{1 + \oneover{0.741}}
+\eeqn
+}
+
+\pagebreak
+\subquestionwithpoints{4} [E.C.] Evaluate if this Weibull model satisfies the proportional hazard assumption.\spc{5}
+
+
+
+Below is the output from a cox proportional hazard model with inference that employs the MLE core theorem:
+
+\begin{Verbatim}
+coxph(formula = surv_obj ~ age + sex + meal.cal, data = lung)
+
+                  coef  exp(coef)  se(coef)       z  Pr(>|z|)  
+age          0.0160863  1.0162163  0.0111394  1.444    0.149  
+sex=Female  -0.4614061  0.6303966  0.1998968 -2.308    0.021 *
+meal.cal    -0.0001175  0.9998825  0.0002485 -0.473    0.636 
+\end{Verbatim}
+
+
+\subquestionwithpoints{2} Will the above model allow you to estimate of the survival (in yr) for a 45yo male who eats 2000cal/d? Circle one: yes / \inred{\fbox{no}}  \spc{-.5}
+
+\subquestionwithpoints{2} Will the above model predict that the survival (in yr) for a 45yo male who eats 2200cal/d is shorter than the survival (in yr) for a 45yo male who eats 2000cal/d? Circle one: \inred{\fbox{yes}} / no  \spc{-.5}
+
+
+\subquestionwithpoints{5} Estimate how much more likely a 45yo female who eats 2000cal/d will survive the next week than a 45yo male who eats 2000cal/d (to the nearest two decimals). \\
+
+\inred{$e^{-0.4614061} = 0.63$}
+\end{enumerate}
+
+
+
+\problem We are interested in the affect of exercise on HDL cholesterol. We survey $n=300$ people and measure their age (measured in years), exercise level (measured in average duration per day in minutes) and HDL cholesterol (measured in mg/dL). Below is a scatterplot of exercise on HDL cholesterol and a scatterplot of age on exercise:
+\pagebreak
+
+\vspace{-0.2cm}
+\begin{figure}[htp]
+\centering
+\includegraphics[width=6.0in]{exercise_cholesterol}
+\end{figure}
+\FloatBarrier
+\vspace{-0.7cm}
+
+\vspace{-0.2cm}
+\begin{figure}[htp]
+\centering
+\includegraphics[width=6.0in]{age_exercise}
+\end{figure}
+\FloatBarrier
+\vspace{-0.7cm}
+
+
+\begin{enumerate}
+
+\subquestionwithpoints{2} Is there any way to prove absolutely that the correlation between exercise and cholesterol is spurious? Circle one: yes / \inred{\fbox{no}}  \spc{-.5}
+\subquestionwithpoints{1} Is there any way to prove absolutely that the correlation between age and exercise is spurious? Circle one: yes / \inred{\fbox{no}}  \spc{-.5}
+\subquestionwithpoints{2} Based only on the plots above and the situation described in the problem header, is there a way to definitively assess that the regression results of the first plot is a \qu{Simpson's Paradox}? Circle one: yes / \inred{\fbox{no}}  \spc{-.5}
+\subquestionwithpoints{2} Based only on the plots above and the situation described in the problem header, is there a way to definitively assess that the regression results of the first plot is a \qu{Berkson's Paradox}? Circle one: \inred{\fbox{yes}} / no  \spc{-.5}
+\subquestionwithpoints{4} Draw below a DAG with nodes that include the variable names that could induce a \qu{Simpson's Paradox} bias when investigating exercise as a cause of the phenomenon HDL. 
+
+
+\vspace{-0.2cm}
+\begin{figure}[htp]
+\centering
+\includegraphics[width=4in]{simpsons}
+\end{figure}
+\FloatBarrier
+\vspace{-0.7cm}
+
+\pagebreak
+\subquestionwithpoints{4} Draw below a DAG with nodes that include the variable names that could induce a partial blocking bias when investigating exercise as a cause of the phenomenon HDL. 
+
+\vspace{-0.2cm}
+\begin{figure}[htp]
+\centering
+\includegraphics[width=4in]{partial_blocking}
+\end{figure}
+\FloatBarrier
+\vspace{-0.7cm}
+
+\end{enumerate}
+
+
+\problem We are interested in understanding the effect of a pill (coded per subject as $w_i=1$) vs a placebo (coded per subject as $w_i=0$) on lowering $y$ HDL cholesterol (measured in mg/dL). We have $n=100$ subjects. We assign subjects a $w_i$ at the beginning of the study and we also record the subjects' sex, $x_i \in \braces{0,1}$, at the beginning of the study. There are 30 women and 70 men. Assume iid mean-centered noise and an additive treatment effect $\beta_T$ which we called the PATE.
+
+\begin{enumerate}
+
+\subquestionwithpoints{2} Is this a controlled trial? Circle one: \inred{\fbox{yes}} / no  \spc{-.5}
+\subquestionwithpoints{2} Do we absolutely need to randomize the values of $w_i$ to guarantee unbiased causal inference? Circle one: yes / \inred{\fbox{no}}  \spc{-.5}
+\subquestionwithpoints{2} If we use \qu{equal allocation}, what is $\sum_{i=1}^n w_i=1~\forall~\w$? \inred{50}
+
+\subquestionwithpoints{2} Assume we proceed with an equal allocation, completely randomized design. How many possible assignments are there? \inred{$\binom{100}{50}$}
+\subquestionwithpoints{3} Assume we proceed with an equal allocation, blocking design. How many possible assignments are there? \inred{$\binom{30}{15} \binom{70}{35}$}
+\subquestionwithpoints{3} Assume we proceed with an pariwise matching design. How many possible assignments are there? \inred{$2^{50}$}
+
+
+\subquestionwithpoints{4} Why would rerandomization be a poor choice (when compared to blocking or pairwise matching) in this scenario?\\
+
+\inred{Rerandomization will not guarantee $x_1$ averages are equal in the pill and placebo arms. Both blocking and pairwise matching will guarantee this.}
+
+\subquestionwithpoints{2} In order to test the sharp null, $H_0: \forall i ~y_i(w_i=1) = y_i(w_i=0)$, which procedure can you use?\\
+
+ \inred{Fisher's Randomization Test}
+\end{enumerate}
+
+
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\beqn
+&& \Xoneton \iid \begin{cases}
+0 \withprob \theta_1 \\
+1 + \poisson{\theta_2} \withprob 1 - \theta_1
+\end{cases} \\
+\Rightarrow && \mathcal{L}(\theta_1, \theta_2; \x) = \prod_{i=1}^n \theta_1^{\indic{x_i = 0}} \tothepow{(1 - \theta_1) \frac{\theta_2^{x_i - 1} e^{-\theta_2}}{(x_i - 1)!}}{\indic{x_i > 0}} \propto \theta_1^{n_0} (1-\theta_1)^{n - n_0} \theta_2^{\sum_{i=1}^n (x_i - 1) \indic{x_i > 0}} }  e^{-(n-n_0)\theta_2
+\eeqn
+
+
+\begin{enumerate}[(a)]
+\subquestionwithpoints{5} Find $\cprob{\theta_1}{\theta_2, \x}$. Show that it is a brand name rv. \spc{3}
+
+\subquestionwithpoints{5} Find $\cprob{\theta_2}{\theta_1, \x}$. Show that it is a brand name rv. \spc{3}
+
+Using the correct answers to the first two questions, we build a Gibbs Sampler
+
+\end{enumerate}
+
+
+\problem Consider the following matrix of constant measurements:
+
+\beqn
+\X := \bracks{\onevec_n~|~\x_{\cdot 1}~|~\ldots~|~ \x_{\cdot p}}
+\eeqn
+
+\noindent with column indices $0, 1, \ldots, p$ and row indices $1, 2, \ldots, n$. We assume also a continuous (real-valued) response model which is linear in these measurements, i.e.
+
+\beqn
+\Y = \X\bbeta + \berrorrv.
+\eeqn
+
+\noindent For the error term, we assume the \qu{core assumption},
+
+\beqn
+\berrorrv \sim \multnormnot{n}{\zerovec_n}{\sigsq \I_n}.
+\eeqn
+
+\noindent And for our estimator of $\bbeta$, we choose
+
+\beqn
+\B := \XtXinvXt \Y.
+\eeqn
+
+\begin{enumerate}[(a)]
+
+\subquestionwithpoints{5} In the \qu{linear response model assumption line} above, list the scalar parameters (if the parameter is a vector, list the scalar entries). If there are no parameters, write \qu{none}. \spc{1}
+
+\subquestionwithpoints{5} In the \qu{core assumption} line above, list the scalar parameters (if the parameter is a vector, list the scalar entries). If there are no parameters, write \qu{none}. \spc{1}
+
+\subquestionwithpoints{5} In the \qu{our estimator} line above, list the scalar parameters (if the parameter is a vector, list the scalar entries). If there are no parameters, write \qu{none}. \spc{1.5}
+
+\subquestionwithpoints{10} Show that $\B$ is unbiased. \spc{6}
+
+
+
+\noindent Now choose the following estimator instead
+
+\beqn
+\B_{\text{ridge}} := \inverse{\XtX + \lambda \I_{p+1}} \Xt \Y ~~\text{where}~\lambda > 0.
+\eeqn
+
+
+\subquestionwithpoints{6} Which of these two will be larger: $\normsq{\B}$ or $\normsq{\B_{\text{ridge}}}$? \spc{0.5}
+
+
+\end{enumerate}
+
+
+\problem This problem will analyze data from a study that investigated tooth cell growth (in length) in guinea pigs by vitamin C dose (0.5, 1 or 2mg/d) and delivery method (OJ = orange juice or VC = vitamin capsule). Here is the results of an OLS model fit to both dose and delivery method:
+
+\begin{Verbatim}[frame=single]
+                Estimate Std. Error t value Pr(>|t|)    
+(Intercept)       9.2725     1.2824   7.231 1.31e-09 ***
+deliveryVC       -3.7000     1.0936  -3.383   0.0013 ** 
+dose              9.7636     0.8768  11.135 6.31e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 4.236 on 57 degrees of freedom
+Multiple R-squared:  0.7038,	Adjusted R-squared:  0.6934 
+F-statistic: 67.72 on 2 and 57 DF,  p-value: 8.716e-16
+\end{Verbatim}
+
+\noindent Unless otherwise noted, assume that $\berrorrv \sim \multnormnot{n}{\zerovec_n}{\sigsq \I_n}$. 
+Let $\X$ denote the design matrix for this linear regression. The following quantities may be useful:
+
+\beqn
+\XtX = \bracks{\begin{array}{ccc} 60 & 30 & 70 \\ 30 & 30 & 30 \\ 70 & 35 & 105 \end{array}}, ~~~
+\XtXinv = \bracks{\begin{array}{ccc} ~~0.09 & -0.03 &-0.05 \\ -0.03 &  ~~0.07 & ~~0.00 \\ -0.05 &  ~~0.00 & ~~0.04 \end{array}}, 
+\eeqn
+
+\begin{enumerate}[(a)]
+
+\subquestionwithpoints{5} What is the sample size $n$ of this dataset?\spc{-0.5}
+
+\subquestionwithpoints{5} Test $H_0: \beta_{\text{dose}} = 0$ at $\alpha = 5\%$. \spc{2}
+
+\subquestionwithpoints{5} Create a 95\% CI for the effect of delivery being a vitamin capsule instead of orange juice. The t-value to use in this computation is 2.00. \spc{2}
+
+\subquestionwithpoints{5} Run the omnibus test at $\alpha = 5\%$. \spc{1}
+
+\subquestionwithpoints{10} For a guinea pig who was given orange juice and 1mg of vitamin C, provide a 95\% CI for the guinea pig's tooth cell growth. The t-value to use in this computation is 2.00. \spc{8}
+
+
+\subquestionwithpoints{10} Assuming independence of errors and homoskedasticity of errors, test $H_0: \beta_{\text{dose}} = 10$ at $\alpha = 5\%$. \spc{4}
+
+
+\subquestionwithpoints{5} Is there enough information here to test $H_0: \beta_{\text{dose}} = 0$ at $\alpha = 5\%$ if we assume independent, mean-centered and heteroskedastic errors? Yes / No \spc{-0.5}
+
+In reality, we are unsure of the distribution of the errors but we know that due to the way the data was sampled, we are guaranteed that the errors are independent. Hence use a bootstrap. We are interested in inference for the effect of delibery being a vitamin capsule instead of orange juice. The top of the following page shows the result of 1,000 boostrap samples where each time, the OLS for this effect was computed. The vertical lines indicate the empirical 2.5\%ile and 97.5\%ile.
+
+
+\begin{figure}[htp]
+\centering
+\includegraphics[width=6.5in]{bootstrap}
+\end{figure}
+\FloatBarrier
+
+
+\subquestionwithpoints{5} Using the boostrap samples, test $H_0: \beta$ for vitamin capsule delivery is zero at $\alpha = 5\%$. \spc{2}
+
+
+\end{enumerate}
+
+\problem This problem will analyze data from a study that investigated the number of yarn breaks by two features: type of yarn wool (A or B) and amount of tension (L = low, M = medium, H = high). Since the response being modeled is a count, we choose a negative binomial model which is more flexible than a Poission model. We parameterize the negative binomial with parameters $r, \theta$ where its expectation is $\theta$. We link $\theta$ to the two features using the link $\theta_i = e^{\x_i \bbeta}$ for $i = 1, \ldots, n$. Below is the summary for the inference of $\bbeta$ for both features (the inference for $r$ is omitted). We also display the log-likelihood of this model.
+
+\begin{Verbatim}[frame=single]
+            Estimate Std. Error z value Pr(>|z|)    
+(Intercept)   3.6734     0.0979  37.520  < 2e-16 ***
+woolB        -0.1862     0.1010  -1.844   0.0651 .  
+tensionM     -0.2992     0.1217  -2.458   0.0140 *  
+tensionH     -0.5114     0.1237  -4.133 3.58e-05 ***
+
+'log Lik.' -199.3819 (df=5)
+\end{Verbatim}
+
+\noindent Here are outputs for two other models:
+
+\begin{Verbatim}[frame=single]
+            Estimate Std. Error z value Pr(>|z|)    
+(Intercept)  3.43518    0.08071  42.562   <2e-16 ***
+woolB       -0.20599    0.11533  -1.786   0.0741 .  
+
+'log Lik.' -206.9874 (df=3)
+\end{Verbatim}
+
+\begin{Verbatim}[frame=single]
+            Estimate Std. Error z value Pr(>|z|)    
+(Intercept)  3.59426    0.08715  41.243  < 2e-16 ***
+tensionM    -0.32132    0.12557  -2.559   0.0105 *  
+tensionH    -0.51849    0.12739  -4.070  4.7e-05 *** 
+
+'log Lik.' -201.0109 (df=4)
+\end{Verbatim}
+
+\noindent Here are some values of the inverse CDF of the $\chisq{df}$ distribution:
+
+\begin{Verbatim}[frame=single,fontsize=\footnotesize]
+                Probability less than the critical value
+  df          0.90      0.95     0.975      0.99     0.999
+----------------------------------------------------------
+  1          2.706     3.841     5.024     6.635    10.828
+  2          4.605     5.991     7.378     9.210    13.816
+  3          6.251     7.815     9.348    11.345    16.266
+  4          7.779     9.488    11.143    13.277    18.467
+  5          9.236    11.070    12.833    15.086    20.515
+  6         10.645    12.592    14.449    16.812    22.458
+  7         12.017    14.067    16.013    18.475    24.322
+\end{Verbatim}
+
+\begin{enumerate}[(a)]
+
+\subquestionwithpoints{4} Is the parameter $r$ a nuisance parameter? Yes / No \spc{-0.5}
+
+\subquestionwithpoints{6} Calculate the likelihood ratio test statistic for the test that tension has no effect on number of yarn breaks. \spc{1.5}
+
+\subquestionwithpoints{3} Test the null hypothesis that tension has no effect on number of yarn breaks at $\alpha=5\%$. Justify your answer. \spc{2}
+
+\subquestionwithpoints{6} The maximum likelihood estimate of $r$ is 9.94. Given a piece of yarn with wool type B and low tension, predict the number of yarn breaks it will have to the nearest number of yarn breaks. \spc{2}
+
+
+\end{enumerate}
+\end{document}
+
