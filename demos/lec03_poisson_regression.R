@@ -71,7 +71,7 @@ for (t in 2 : num_tot_samples){
 
 #diagnostics - how often did the chain move?
 mean(accept_theta0s)
-mean(accept_theta2s)
+mean(accept_theta1s)
 #not so great... we may want to go back and change our proposal distributions
 #if we have to thin too much
 
@@ -83,7 +83,7 @@ gibbs_chain = data.frame(
 )
 
 #assess convergence
-max_t_for_plotting = 2000
+max_t_for_plotting = 3000
 ggplot(gibbs_chain) +
   geom_point(aes(x = t, y = theta_0)) + 
   xlim(0, max_t_for_plotting)
@@ -99,13 +99,13 @@ theta0s = theta0s[t_burn_in : num_tot_samples]
 theta1s = theta1s[t_burn_in : num_tot_samples]
 
 ##assess autocorrelation
-par(mfrow = c(2, 1))
-ell_max = 500
-r_max = 1
+par(mfrow = c(1, 2))
+ell_max = 125
+r_max = 0.3
 acf(theta0s, 
-    xlim = c(0, ell_max + 10), ylim = c(0, r_max), lag.max = ell_max)
+    xlim = c(0, ell_max + 10), ylim = c(0, r_max), lag.max = ell_max, main = "beta0")
 acf(theta1s, 
-    xlim = c(0, ell_max + 10), ylim = c(0, r_max), lag.max = ell_max)
+    xlim = c(0, ell_max + 10), ylim = c(0, r_max), lag.max = ell_max, main = "beta1")
 #let's get a closer look to make sure by zooming in on the y-axis
 
 #let's make a judgment call - maybe at 100
@@ -117,5 +117,5 @@ gibbs_chain = gibbs_chain[seq(1, nrow(gibbs_chain), by = t_thin), ]
 nrow(gibbs_chain)
 
 #inference
-visualize_chain_and_compute_estimates_and_cr(gibbs_chain$theta_0, true_theta_0)
-visualize_chain_and_compute_estimates_and_cr(gibbs_chain$theta_1, true_theta_1)
+visualize_chain_and_compute_estimates_and_cr(gibbs_chain$theta_0, true_theta_0, bins = 100)
+visualize_chain_and_compute_estimates_and_cr(gibbs_chain$theta_1, true_theta_1, bins = 100)
